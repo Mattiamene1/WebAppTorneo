@@ -1,0 +1,103 @@
+//Girone A
+
+db.squadre.insert([
+    {
+    girone:"A",
+    squadra:"ChiavoVerona",
+    punti: "0"
+    },
+    {
+    girone:"A",
+    squadra:"BonetIraniane",
+    punti:0
+    },
+    {
+    girone:"A",
+    squadra:"BallaConThsabalala",
+    punti: "0"
+    },
+    {
+    girone:"A",
+    squadra:"GordoTeam",
+    punti: "0"
+    },
+    {
+    girone:"A",
+    squadra:"VascoDaGama",
+    punti:"0"
+    },
+    {
+    girone:"A",
+    squadra:"Catordonici",
+    punti:"0"
+    }
+]);
+
+//Girone B
+
+db.squadre.insert([
+    {
+    girone:"B",
+    squadra:"Zanellars",
+    punti: "0"
+    },
+    {
+    girone:"B",
+    squadra:"ACM Dossetti",
+    punti:0
+    },
+    {
+    girone:"B",
+    squadra:"Maggioranza Silenziosa",
+    punti: "0"
+    },
+    {
+    girone:"B",
+    squadra:"Deportivo LL",
+    punti: "0"
+    }
+]);/*,
+    {
+    girone:"B",
+    squadra:"",
+    punti:"0"
+    },
+    {
+    girone:"B",
+    squadra:"",
+    punti:"0"
+]);
+}*/
+
+db.squadre.insert([
+    {
+    girone:"C",
+    squadra:"Domeshaming",
+    punti: "0"
+    },
+    {
+    girone:"C",
+    squadra:"Trento's Bastardins",
+    punti:0
+    },
+    {
+    girone:"C",
+    squadra:"I Broskov",
+    punti: "0"
+    },
+    {
+    girone:"C",
+    squadra:"36061",
+    punti: "0"
+    },
+    {
+    girone:"C",
+    squadra:"Admin's Squad",
+    punti:"0"
+    },
+    {
+    girone:"C",
+    squadra:"Manchester Unitn",
+    punti:"0"
+    }
+]);
