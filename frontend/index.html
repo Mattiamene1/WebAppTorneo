@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+    <title>Torneo Unitn</title>
+<!--
+
+Template found on:
+
+https://templatemo.com/tm-548-training-studio
+
+-->
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+
+    <link rel="stylesheet" href="assets/css/templatemo-training-studio.css">
+
+    </head>
+    
+    <body>
+    
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+      <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+    
+    
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.html" class="logo">Torneo<em> Unitn</em></a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="#top" class="active">Dashboard</a></li>
+                            <li class="scroll-to-section"><a href="#classifica">Classifiche</a></li>
+                            <li class="scroll-to-section"><a href="#risultati">Risultati</a></li> <!-- to implement-->
+                            <li class="scroll-to-section"><a href="#calendario">Calendario</a></li> <!-- to implement-->
+                            <li class="scroll-to-section"><a href="#tabellone">Tabellone</a></li> <!-- to implement-->
+                            <li class="scroll-to-section"><a href="#marcatori">Marcatori</a></li>
+                            <li class="scroll-to-section"><a href="#login">Log In</a></li>
+                        <!--<li class="main-button"><a href="#">Sign Up</a></li> -->
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner" id="top">
+        <video autoplay muted loop id="bg-video">
+            <source src="assets/images/Football-Animation.mp4" type="video/mp4" />
+        </video>
+
+        <div class="video-overlay header-text">
+            <div class="caption">
+                <h6>Ingegneria del software</h6>
+                <h2>Torneo <em>Calcio a 5</em></h2>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+
+
+    
+    <!-- Inizio Blocco classifica-->
+    <section class="section" id="classifica">
+      <div>
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <div class="section-heading dark-bg">
+              <h2 style="color:black">Classifica <em>Gironi</em></h2>
+            </div>
+          </div>
+        </div>
+        <div>
+        <table align="center">
+        <!--***GIRONE A***-->
+          <td>
+            <div>
+              <table>
+                <caption><p>Girone A</p></caption>
+                  <thead>
+                    <tr>
+                      <th width="30"></th>
+                      <th width="230">Squadra</th>                                
+                      <th width="30">G</th>
+                      <th width="30">P</th>
+                      <th width="30">V</th>
+                      <th width="30">P</th>
+                      <th width="30">S</th>
+                      <th width="40">GF</th>
+                      <th width="40">GS</th>
+                      <th width="50">DR</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr bgcolor="red">
+                      <td>1</td>                        <!-- Posizione -->
+                      <td>BallaConThsabalala</td>       <!-- Squadra -->
+                      <td>1</td>                        <!-- Giocate -->
+                      <td>3</td>                        <!-- Punti -->
+                      <td>1</td>                        <!-- Vittorie -->
+                      <td>0</td>                        <!-- Pareggi -->
+                      <td>0</td>                        <!-- Sconfitte -->
+                      <td>6</td>                        <!-- Gol Fatti -->
+                      <td>4</td>                        <!-- Gol Subiti -->
+                      <td>2</td>                        <!-- Differenza reti -->
+                    </tr>
+                    <tr bgcolor="red">
+                      <td>2</td>                        <!-- Posizione -->
+                      <td>Bonet Iraniane</td>           <!-- Squadra -->
+                      <td>1</td>                        <!-- Giocate -->
+                      <td>3</td>                        <!-- Punti -->
+                      <td>1</td>                        <!-- Vittorie -->
+                      <td>0</td>                        <!-- Pareggi -->
+                      <td>0</td>                        <!-- Sconfitte -->
+                      <td>5</td>                        <!-- Gol Fatti -->
+                      <td>2</td>                        <!-- Gol Subiti -->
+                      <td>2</td>                        <!-- Differenza reti -->
+                    </tr>
+                    <tr bgcolor="orange">
+                      <td>3</td>                        <!-- Posizione -->
+                      <td>Vasco Da Gama</td>            <!-- Squadra -->
+                      <td>1</td>                        <!-- Giocate -->
+                      <td>3</td>                        <!-- Punti -->
+                      <td>1</td>                        <!-- Vittorie -->
+                      <td>0</td>                        <!-- Pareggi -->
+                      <td>0</td>                        <!-- Sconfitte -->
+                      <td>8</td>                        <!-- Gol Fatti -->
+                      <td>3</td>                        <!-- Gol Subiti -->
+                      <td>5</td>                        <!-- Differenza reti -->
+                    </tr>
+                    <tr>
+                      <td>4</td>                        <!-- Posizione -->
+                      <td>Chiavo Verona</td>            <!-- Squadra -->
+                      <td>1</td>                        <!-- Giocate -->
+                      <td>0</td>                        <!-- Punti -->
+                      <td>0</td>                        <!-- Vittorie -->
+                      <td>0</td>                        <!-- Pareggi -->
+                      <td>1</td>                        <!-- Sconfitte -->
+                      <td>4</td>                        <!-- Gol Fatti -->
+                      <td>6</td>                        <!-- Gol Subiti -->
+                      <td>-2</td>                       <!-- Differenza reti -->
+                    </tr>
+                    <tr>
+                      <td>5</td>                        <!-- Posizione -->
+                      <td>Gordo Team</td>               <!-- Squadra -->
+                      <td>1</td>                        <!-- Giocate -->
+                      <td>0</td>                        <!-- Punti -->
+                      <td>0</td>                        <!-- Vittorie -->
+                      <td>0</td>                        <!-- Pareggi -->
+                      <td>1</td>                        <!-- Sconfitte -->
+                      <td>2</td>                        <!-- Gol Fatti -->
+                      <td>5</td>                        <!-- Gol Subiti -->
+                      <td>-3</td>                       <!-- Differenza reti -->
+                    </tr>
+                    <tr>
+                      <td>6</td>                        <!-- Posizione -->
+                      <td>Catordonici</td>              <!-- Squadra -->
+                      <td>1</td>                        <!-- Giocate -->
+                      <td>0</td>                        <!-- Punti -->
+                      <td>0</td>                        <!-- Vittorie -->
+                      <td>0</td>                        <!-- Pareggi -->
+                      <td>1</td>                        <!-- Sconfitte -->
+                      <td>3</td>                        <!-- Gol Fatti -->
+                      <td>8</td>                        <!-- Gol Subiti -->
+                      <td>-5</td>                       <!-- Differenza reti -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+            <!--***FINE GIRONE A***-->
+            <td width="30"></td>
+            <!--***INIZIO GIRONE B***-->
+            <td>
+              <div>
+                <table>
+                  <caption><p>Girone B</p></caption>
+                    <thead>
+                      <tr>
+                        <th width="30"></th>
+                        <th width="230">Squadra</th>                                
+                        <th width="30">G</th>
+                        <th width="30">P</th>
+                        <th width="30">V</th>
+                        <th width="30">P</th>
+                        <th width="30">S</th>
+                        <th width="40">GF</th>
+                        <th width="40">GS</th>
+                        <th width="50">DR</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr bgcolor="red">
+                          <td>1</td>                        <!-- Posizione -->
+                          <td>Zanellars</td>                <!-- Squadra -->
+                          <td>1</td>                        <!-- Giocate -->
+                          <td>3</td>                        <!-- Punti -->
+                          <td>1</td>                        <!-- Vittorie -->
+                          <td>0</td>                        <!-- Pareggi -->
+                          <td>0</td>                        <!-- Sconfitte -->
+                          <td>6</td>                        <!-- Gol Fatti -->
+                          <td>4</td>                        <!-- Gol Subiti -->
+                          <td>2</td>                        <!-- Differenza reti -->
+                        </tr>
+                        <tr bgcolor="red">
+                          <td>2</td>                        <!-- Posizione -->
+                          <td>ACM Dossetti</td>             <!-- Squadra -->
+                          <td>1</td>                        <!-- Giocate -->
+                          <td>3</td>                        <!-- Punti -->
+                          <td>1</td>                        <!-- Vittorie -->
+                          <td>0</td>                        <!-- Pareggi -->
+                          <td>0</td>                        <!-- Sconfitte -->
+                          <td>5</td>                        <!-- Gol Fatti -->
+                          <td>2</td>                        <!-- Gol Subiti -->
+                          <td>2</td>                        <!-- Differenza reti -->
+                        </tr>
+                        <tr bgcolor="orange">
+                          <td>3</td>                        <!-- Posizione -->
+                          <td>Maggioranza Silenziosa</td>   <!-- Squadra -->
+                          <td>1</td>                        <!-- Giocate -->
+                          <td>3</td>                        <!-- Punti -->
+                          <td>1</td>                        <!-- Vittorie -->
+                          <td>0</td>                        <!-- Pareggi -->
+                          <td>0</td>                        <!-- Sconfitte -->
+                          <td>8</td>                        <!-- Gol Fatti -->
+                          <td>3</td>                        <!-- Gol Subiti -->
+                          <td>5</td>                        <!-- Differenza reti -->
+                        </tr>
+                        <tr>
+                          <td>4</td>                        <!-- Posizione -->
+                          <td>Deportivo L.L</td>            <!-- Squadra -->
+                          <td>1</td>                        <!-- Giocate -->
+                          <td>0</td>                        <!-- Punti -->
+                          <td>0</td>                        <!-- Vittorie -->
+                          <td>0</td>                        <!-- Pareggi -->
+                          <td>1</td>                        <!-- Sconfitte -->
+                          <td>4</td>                        <!-- Gol Fatti -->
+                          <td>6</td>                        <!-- Gol Subiti -->
+                          <td>-2</td>                       <!-- Differenza reti -->
+                        </tr>
+                        <tr>
+                          <td>5</td>                        <!-- Posizione -->
+                          <td>Milan</td>                    <!-- Squadra -->
+                          <td>1</td>                        <!-- Giocate -->
+                          <td>0</td>                        <!-- Punti -->
+                          <td>0</td>                        <!-- Vittorie -->
+                          <td>0</td>                        <!-- Pareggi -->
+                          <td>1</td>                        <!-- Sconfitte -->
+                          <td>2</td>                        <!-- Gol Fatti -->
+                          <td>5</td>                        <!-- Gol Subiti -->
+                          <td>-3</td>                       <!-- Differenza reti -->
+                        </tr>
+                        <tr>
+                          <td>6</td>                        <!-- Posizione -->
+                          <td>Fiorentina</td>               <!-- Squadra -->
+                          <td>1</td>                        <!-- Giocate -->
+                          <td>0</td>                        <!-- Punti -->
+                          <td>0</td>                        <!-- Vittorie -->
+                          <td>0</td>                        <!-- Pareggi -->
+                          <td>1</td>                        <!-- Sconfitte -->
+                          <td>3</td>                        <!-- Gol Fatti -->
+                          <td>8</td>                        <!-- Gol Subiti -->
+                          <td>-5</td>                       <!-- Differenza reti -->
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+                <!--***FINE GIRONE B***-->
+                <td width="30"></td>
+                <!--***INIZIO GIRONE c***-->
+                <td>
+                  <div>
+                    <table>
+                      <caption><p>Girone C</p></caption>
+                      <thead>
+                        <tr>
+                          <th width="30"></th>
+                          <th width="230">Squadra</th>                                
+                          <th width="30">G</th>
+                          <th width="30">P</th>
+                          <th width="30">V</th>
+                          <th width="30">P</th>
+                          <th width="30">S</th>
+                          <th width="40">GF</th>
+                          <th width="40">GS</th>
+                          <th width="50">DR</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr bgcolor="red">
+                          <td>1</td>                        <!-- Posizione -->
+                          <td>Domeshaming</td>              <!-- Squadra -->
+                          <td>1</td>                        <!-- Giocate -->
+                          <td>3</td>                        <!-- Punti -->
+                          <td>1</td>                        <!-- Vittorie -->
+                          <td>0</td>                        <!-- Pareggi -->
+                          <td>0</td>                        <!-- Sconfitte -->
+                          <td>6</td>                        <!-- Gol Fatti -->
+                          <td>4</td>                        <!-- Gol Subiti -->
+                          <td>2</td>                        <!-- Differenza reti -->
+                        </tr>
+                        <tr bgcolor="red">
+                          <td>2</td>                        <!-- Posizione -->
+                          <td>Trento's Bastardins</td>      <!-- Squadra -->
+                          <td>1</td>                        <!-- Giocate -->
+                          <td>3</td>                        <!-- Punti -->
+                          <td>1</td>                        <!-- Vittorie -->
+                          <td>0</td>                        <!-- Pareggi -->
+                          <td>0</td>                        <!-- Sconfitte -->
+                          <td>5</td>                        <!-- Gol Fatti -->
+                          <td>2</td>                        <!-- Gol Subiti -->
+                          <td>2</td>                        <!-- Differenza reti -->
+                        </tr>
+                        <tr bgcolor="orange">
+                          <td>3</td>                        <!-- Posizione -->
+                          <td>I Broskov</td>   <!-- Squadra -->
+                          <td>1</td>                        <!-- Giocate -->
+                          <td>3</td>                        <!-- Punti -->
+                          <td>1</td>                        <!-- Vittorie -->
+                          <td>0</td>                        <!-- Pareggi -->
+                          <td>0</td>                        <!-- Sconfitte -->
+                          <td>8</td>                        <!-- Gol Fatti -->
+                          <td>3</td>                        <!-- Gol Subiti -->
+                          <td>5</td>                        <!-- Differenza reti -->
+                        </tr>
+                        <tr>
+                          <td>4</td>                        <!-- Posizione -->
+                          <td>36061</td>                    <!-- Squadra -->
+                          <td>1</td>                        <!-- Giocate -->
+                          <td>0</td>                        <!-- Punti -->
+                          <td>0</td>                        <!-- Vittorie -->
+                          <td>0</td>                        <!-- Pareggi -->
+                          <td>1</td>                        <!-- Sconfitte -->
+                          <td>4</td>                        <!-- Gol Fatti -->
+                          <td>6</td>                        <!-- Gol Subiti -->
+                          <td>-2</td>                       <!-- Differenza reti -->
+                        </tr>
+                        <tr>
+                          <td>5</td>                        <!-- Posizione -->
+                          <td>Admin's Squad</td>            <!-- Squadra -->
+                          <td>1</td>                        <!-- Giocate -->
+                          <td>0</td>                        <!-- Punti -->
+                          <td>0</td>                        <!-- Vittorie -->
+                          <td>0</td>                        <!-- Pareggi -->
+                          <td>1</td>                        <!-- Sconfitte -->
+                          <td>2</td>                        <!-- Gol Fatti -->
+                          <td>5</td>                        <!-- Gol Subiti -->
+                          <td>-3</td>                       <!-- Differenza reti -->
+                        </tr>
+                        <tr>
+                          <td>6</td>                        <!-- Posizione -->
+                          <td>Manchester Unitn</td>         <!-- Squadra -->
+                          <td>1</td>                        <!-- Giocate -->
+                          <td>0</td>                        <!-- Punti -->
+                          <td>0</td>                        <!-- Vittorie -->
+                          <td>0</td>                        <!-- Pareggi -->
+                          <td>1</td>                        <!-- Sconfitte -->
+                          <td>3</td>                        <!-- Gol Fatti -->
+                          <td>8</td>                        <!-- Gol Subiti -->
+                          <td>-5</td>                       <!-- Differenza reti -->
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+                <!--***FINE GIRONE C***-->
+        </table>
+      </div>
+    </section>
+    <p style="color:white">.</p>
+    <!-- ***** Classifica Ends ***** -->
+
+    <table width="100%">
+      <tr>
+        <td heigh="100" bgcolor="#ed563b">&nbsp;</td>
+      </tr>
+    </table>
+
+    <!-- ***** Risultati *****-->
+    <section class="section" id="risultati">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <div class="section-heading dark-bg">
+              <h2><em>Risultati</em></h2>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <table align="center">
+            <tbody> 
+              <tr>
+                <td align="center" colspan="5"><p><b>18/02/2022</b></p></td>
+              </tr>
+              <tr>
+                <td width="250" align="right">  <p>Casa</p>       </td>
+                <td width="30" align="center">  <p> 5 </p>        </td>
+                <td width="30" align="center">  <p> - </p>        </td>
+                <td width="30" align="center">  <p> 3 </p>        </td>
+                <td width="250" align="left">   <p>Trasferta</p>  </td>
+              </tr>
+              <tr>
+                <td heigh="50" colspan="5">&nbsp;</td>
+              </tr>
+              <!----------------------------------------------------------->
+              <tr>
+                <td align="center" colspan="5"><p><b>18/02/2022</b></p></td>
+              </tr>
+              <tr>
+                <td width="250" align="right">  <p>Casa</p>       </td>
+                <td width="30" align="center">  <p> 5 </p>        </td>
+                <td width="30" align="center">  <p> - </p>        </td>
+                <td width="30" align="center">  <p> 3 </p>        </td>
+                <td width="250" align="left">   <p>Trasferta</p>  </td>
+              </tr>
+              <tr>
+                <td heigh="50" colspan="5">&nbsp;</td>
+              </tr>
+              <!----------------------------------------------------------->
+              <tr>
+                <td align="center" colspan="5"><p><b>18/02/2022</b></p></td>
+              </tr>
+              <tr>
+                <td width="250" align="right">  <p>Casa</p>       </td>
+                <td width="30" align="center">  <p> 5 </p>        </td>
+                <td width="30" align="center">  <p> - </p>        </td>
+                <td width="30" align="center">  <p> 3 </p>        </td>
+                <td width="250" align="left">   <p>Trasferta</p>  </td>
+              </tr>
+              <tr>
+                <td heigh="50" colspan="5">&nbsp;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      
+      </div>
+    </section>
+    <!-- ***** Risultati Ends *****-->
+
+    <table width="100%">
+      <tr>
+        <td heigh="100" bgcolor="#ed563b">&nbsp;</td>
+      </tr>
+    </table>
+
+    <!-- ***** Calendario *****-->
+    <section class="section" id="calendario">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <div class="section-heading dark-bg">
+              <h2><em>Calendario</em></h2>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <table align="center" >
+            <tbody> 
+              <tr>
+                <td align="center" colspan="3"><p><b>18/02/2022</b></p></td>
+              </tr>
+              <tr>
+                <td width="250" align="right">  <p>Casa</p>       </td>
+                <td width="30" align="center">  <p> - </p>        </td>
+                <td width="250" align="left">   <p>Trasferta</p>  </td>
+              </tr>
+              <tr>
+                <td heigh="50" colspan="3">&nbsp;</td>
+              </tr>
+              <!----------------------------------------------------------->
+              <tr>
+                <td align="center" colspan="3"><p><b>18/02/2022</b></p></td>
+              </tr>
+              <tr>
+                <td width="250" align="right">  <p>Casa</p>       </td>
+                <td width="30" align="center">  <p> - </p>        </td>
+                <td width="250" align="left">   <p>Trasferta</p>  </td>
+              </tr>
+              <tr>
+                <td heigh="50" colspan="3">&nbsp;</td>
+              </tr>
+              <!----------------------------------------------------------->
+              <tr>
+                <td align="center" colspan="3"><p><b>18/02/2022</b></p></td>
+              </tr>
+              <tr>
+                <td width="250" align="right">  <p>Casa</p>       </td>
+                <td width="30" align="center">  <p> - </p>        </td>
+                <td width="250" align="left">   <p>Trasferta</p>  </td>
+              </tr>
+              <tr>
+                <td heigh="50" colspan="3">&nbsp;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      
+      </div>
+    </section>
+    <!-- ***** Calendario Ends *****-->
+
+
+
+
+    <!-- ***** Tabellone ***** -->
+    <section class="section" id="tabellone">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <div class="section-heading dark-bg">
+              <h2>Tabellone <em>Finale&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</em></h2>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="tabellone">
+            <table>
+              <tbody>
+                <tr>
+                  <td width="150" heigh="50"><div class="riquadracelle"><table><tr><td><p> PrimaGironeA </p> </td></tr></table></td></div>            <!-- Prima A -->
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"heigh="50"><div class="riquadracelle"><table><tr><td><p> PrimaGironeC </p> </td></tr></table></div></td>             <!-- Prima C -->
+                </tr>
+                <tr>
+                  <td heigh="30"></td>                                                                                <!-- Spazio 1-->
+                </tr>
+                <tr>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150" heigh="50"><div class="riquadracelle"><table><tr><td><p> Vincente 1GA-3M BC </p> </td></tr></table></div></td>         <!-- vincente 1GA vs 3m BC -->
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150" heigh="50"><div class="riquadracelle"><table><tr><td><p>Vincente 1GC-3M AB</p></td></tr></table></div></td>            <!-- vincente 1GC vs 3m AB -->
+                  <td width="30"></td>
+                  <td width="150"></td>
+                </tr>
+                <tr>
+                  <td heigh="30"></td>                                                                                                                  <!-- Spazio 2-->
+                </tr>
+                <tr>
+                  <td width="150" heigh="50"><div class="riquadracelle"><table><tr><td><p>TerzaMigliore B/C</p> </td></tr></table></div></td>           <!-- 3m BC -->
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>  
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"heigh="50"><div class="riquadracelle"><table><tr><td><p>TerzaMigliore A/B</p> </td></tr></table></div></td>            <!-- 3m AB -->
+                </tr>
+                <tr>
+                  <td heigh="50">&NonBreakingSpace;</td>                                                                                                <!-- Spazio 3-->
+                </tr>
+                <tr>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150" heigh="50"><div class="riquadracelle"><table><tr><td><p>Finalista SX</p></td></tr></table></div></td>                 <!-- Finalista SX -->
+                  <td width="15">-</td>
+                  <td width="150" heigh="50"><div class="riquadracelle"><table><tr><td><p>Finalista DX</p></td></tr></table></div></td>                 <!-- Finalista DX -->
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"></td>
+                </tr>
+                <tr>
+                  <td heigh="50">&NonBreakingSpace;</td>                                                                                                <!-- Spazio 4-->
+                </tr>
+                <tr>
+                  <td width="150" heigh="50"><div class="riquadracelle"><table><tr><td><p>TerzaMigliore B/C</p> </td></tr></table></div></td>           <!-- 3m BC -->
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>  
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"heigh="50"><div class="riquadracelle"><table><tr><td><p>SecondaGironeA</p> </td></tr></table></div></td>               <!-- 2GA -->
+                </tr>
+                <tr>
+                  <td heigh="30"></td>                                                                                                                  <!-- Spazio 5-->
+                </tr>
+                <tr>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="160" heigh="50"><div class="riquadracelle"><table><tr><td><p> Vincente 3M BC - 1GB </p> </td></tr></table></div></td>     <!-- vincente 3m BC - 1GB -->
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150" heigh="50"><div class="riquadracelle"><table><tr><td><p>Vincente 2GB-2GA</p></td></tr></table></div></td>            <!-- vincente 2GB vs 2GA -->
+                  <td width="30"></td>
+                  <td width="150"></td>
+                </tr>
+                <tr>
+                  <td heigh="30"></td>                                                                                                                  <!-- Spazio 6-->
+                </tr>
+                <tr>
+                  <td width="150" heigh="50"><div class="riquadracelle"><table><tr><td><p> PrimaGironeB </p> </td></tr></table></td></div>              <!-- Prima B -->
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"></td>
+                  <td width="30"></td>
+                  <td width="150"heigh="50"><div class="riquadracelle"><table><tr><td><p> SecondaGironeB </p> </td></tr></table></div></td>               <!-- seconda B -->
+                </tr>
+                <tr>
+                  <td heigh="550">&NonBreakingSpace;</td>                                                                                                <!-- Spazio 4-->
+                </tr>
+              </tbody>
+           </table>
+          </div>
+        </div>
+
+
+
+      </div>
+    </section>
+
+
+
+
+
+
+    <!-- ***** Marcatori ***** -->
+    <section class="main-banner" id="marcatori">
+      <video autoplay muted loop id="bg-video">
+        <source src="assets/images/UefaCLBackground.mp4" type="video/mp4" />
+      </video>
+
+      <div class="video-overlay header-text">
+        <div class="section-heading dark-bg">
+            <h2>Classifica <em>Marcatori</em></h2>
+        </div>
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-10 offset-lg-1">
+                  <div class="marcatori-table filtering">
+                      <table>
+                        <head>
+                          <tr>
+                            <th style="color:white">Giocatore</th>
+                            <th style="color:white">Squadra</th>
+                            <th style="color:white">Goal Fatti</th>
+                          </tr>
+                        </head>
+                        <tbody>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">Giocaaaaaaa</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                          <tr>
+                            <td width="100">NomeGiocatore</td>
+                            <td width="250">SquadraGiocatore</td>
+                            <td width="40">GolFatti</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <p style="color:white">.</p>
+
+
+
+
+
+    <!-- ***** Contact Us Area Starts ***** -->
+    
+    <section class="section" id="contactus">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="contact-form">
+                        <form id="contact" action="" method="post">
+                          <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                              <fieldset>
+                                <input name="name" type="text" id="name" placeholder="Your Name*" required="">
+                              </fieldset>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                              <fieldset>
+                                <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email*" required="">
+                              </fieldset>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                              <fieldset>
+                                <input name="subject" type="text" id="subject" placeholder="Subject">
+                              </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                              <fieldset>
+                                <textarea name="message" rows="6" id="message" placeholder="Message" required=""></textarea>
+                              </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                              <fieldset>
+                                <button type="submit" id="form-submit" class="main-button">Send Message</button>
+                              </fieldset>
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Contact Us Area Ends ***** -->
+    
+    <!-- ***** Footer Start ***** -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; 2022 Meneghin Mattia</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="assets/js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="assets/js/scrollreveal.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/imgfix.min.js"></script> 
+    <script src="assets/js/mixitup.js"></script> 
+    <script src="assets/js/accordions.js"></script>
+    
+    <!-- Global Init -->
+    <script src="assets/js/custom.js"></script>
+
+  </body>
+</html>
