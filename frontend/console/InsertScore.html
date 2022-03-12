@@ -88,7 +88,7 @@
             <tr>
                 <td>
                     <form name="team1">
-                        <label for="html">Squadra 1</label><br>
+                        <label for="html">Squadra Home</label><br>
                         <div>
                             <select name="team1">
                                 <option value="ChiavoVerona">[A] ChiavoVerona</option>
@@ -166,7 +166,7 @@
                 </td>
                 <td>
                     <form name="team2">
-                        <label for="html">Squadra 2</label><br>
+                        <label for="html">Squadra Away</label><br>
                         <div>
                             <select name="team2">
                                 <option value="ChiavoVerona">[A] ChiavoVerona</option>
@@ -200,12 +200,39 @@
     </div>
 <!--Squadra Ospite-->
 
-    <form name="formsquadra2">
-        <div>
-            <select name="squadra2">
-               <option>Marcatore 1</option>
-            </select>
-        </div>
-    </form>
+    <div>
+        <table border="0">
+            <tr>
+                <td>
+                    <form name="marcatoriH">
+                        <label for="html">Marcatori Home</label><br>
+                        <div>
+                            <select name="marcatoriH">
+                                <option value="marcatore1">Marcatore 1</option>
+                            </select>
+                        </div>
+                    </form>
+                </td>
+                <td width="180">&nbsp;</td>             
+                <td>
+                    <form name="marcatoriA">
+                        <label for="html">Marcatori Away</label><br>
+                        <div>
+                            <select name="marcatoriA">
+                                <option value="marcatore1">Marcatore 1</option>      <!--Nome Marcatore-->
+                            </select>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><button type="button">Invia Risultato</button></td>
+            </tr>
+        </table>
+    </div>
+
     </body>
 </html>
