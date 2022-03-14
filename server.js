@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 
 const app = express();
-
+//dummy comment
 app.use("/static", express.static(path.resolve(__dirname, "frontend", "static")));
 app.use("/assets", express.static(path.resolve(__dirname, "frontend", "assets")));
 app.use("/css", express.static(path.resolve(__dirname, "frontend", "assets", "css")));
