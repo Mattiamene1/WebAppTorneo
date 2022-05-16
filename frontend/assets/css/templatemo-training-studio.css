@@ -202,7 +202,7 @@ header
 */
 
 .background-header {
-  background: rgba(250,250,250,0.99) !important;
+  background: rgba(141, 138, 138, 0.99) !important;
   height: 80px!important;
   position: fixed!important;
   top: 0px;
@@ -217,7 +217,7 @@ header
 }
 
 .background-header .main-nav .nav li:last-child a {
-  color: #fff !important;
+  color: rgb(131, 128, 128) !important;
 }
 
 .background-header .main-nav .nav li:last-child a:hover {
@@ -253,7 +253,7 @@ header
 
 .header-area .main-nav .logo {
   line-height: 80px;
-  color: #fff;
+  color: rgb(129, 122, 122);
   font-size: 32px;
   font-weight: 800;
   text-transform: uppercase;
@@ -631,6 +631,7 @@ banner
   left: 50%;
   top: 50%;
   transform: translate(-50%,-50%);
+  background-color: #797876;
 }
 
 .main-banner .caption h6 {
@@ -658,7 +659,7 @@ banner
   font-weight: 900;
 }
 
-
+  
 /*
 --------------------------------------------
 Squadre
@@ -1067,7 +1068,6 @@ footer p a {
 footer p a:hover {
   color: #ed563b;
 }
-
 
 
 /* 
