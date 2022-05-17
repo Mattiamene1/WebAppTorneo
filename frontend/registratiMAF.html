@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Registrazione Manager Della Federazione</title>
+
+
+
+
 </head>
 
 <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -26,18 +30,18 @@
             <div class="form-type">
                 <em>Inserire i propri dati completando tutti i campi richiesti.</em>
                 <br>
-                <form>
+                <form method="post"  id="myform" action="http://127.0.0.1:8080/api/v1/maf">
                     <label for="fname" >Nome: *</label><br>
-                    <input type="text" id="fname" name="fname" required><br><br>
+                    <input type="text" id="fname" name="name" required><br><br>
                     <label for="lname" >Cognome: *</label><br>
-                    <input type="text" id="lname" name="lname" required><br><br>
+                    <input type="text" id="lname" name="surname" required><br><br>
                     <label for="cf" >Codice Fiscale: *</label><br>
                     <input type="text" id="cf" name="cf" required>  Non te lo ricordi? <a href="http://www.codicefiscaleonline.com/">Clicca qui</a><br><br>
                     <label for="mail">Email:(Google) *</label><br>
-                    <input type="email" id="mail" name="mail" pattern=".+@gmail\.com" size="30" required><br><br><br>                   
+                    <input type="email" id="mail" name="email" pattern=".+@gmail\.com" size="30" required><br><br><br>                   
                     <input type="checkbox" id="privacy" name="privacy" value="privacy" required>
                     <label for="privacy">Dichiaro di aver letto l'<a target="_blank" href="#">informativa sulla privacy</a> ai sensi del GDPR e do il consenso al trattamento dei dati personali.</label><br>
-                    <input type="submit" value="Submit"><br> 
+                    <input type="submit" value="Submit" id="submit"><br> 
                 </form>
             </div>
         </div>
