@@ -1,19 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>Registrazione Manager Della Federazione</title>
-
-
-
-
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/ModificaStyle.css">
 </head>
-
-<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-
-<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
-
-<link rel="stylesheet" href="assets/css/ModificaStyle.css">
 
 <body>
     <!-- Header PAGINA DI MODIFICA -->
@@ -30,15 +23,15 @@
             <div class="form-type">
                 <em>Inserire i propri dati completando tutti i campi richiesti.</em>
                 <br>
-                <form method="post"  id="myform" action="http://127.0.0.1:8080/api/v1/maf">
+                <form id="myform">
                     <label for="fname" >Nome: *</label><br>
                     <input type="text" id="fname" name="name" required><br><br>
                     <label for="lname" >Cognome: *</label><br>
                     <input type="text" id="lname" name="surname" required><br><br>
                     <label for="cf" >Codice Fiscale: *</label><br>
                     <input type="text" id="cf" name="cf" required>  Non te lo ricordi? <a href="http://www.codicefiscaleonline.com/">Clicca qui</a><br><br>
-                    <label for="mail">Email:(Google) *</label><br>
-                    <input type="email" id="mail" name="email" pattern=".+@gmail\.com" size="30" required><br><br><br>                   
+                    <label for="mail">Email: (Google) *</label><br>
+                    <input type="email" id="email" name="email" pattern=".+@gmail\.com" size="30" required><br><br><br>                   
                     <input type="checkbox" id="privacy" name="privacy" value="privacy" required>
                     <label for="privacy">Dichiaro di aver letto l'<a target="_blank" href="#">informativa sulla privacy</a> ai sensi del GDPR e do il consenso al trattamento dei dati personali.</label><br>
                     <input type="submit" value="Submit" id="submit"><br> 
@@ -50,6 +43,41 @@
     <br>
     </section>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        const apiUrl = "http://localhost:3000/api/v1/maf"
 
+        $(document).ready(function() {
+            $("#myform").submit(function(e) {
+                e.preventDefault();
+                let nome = $("#fname").val(),
+                    cognome = $("#lname").val(),
+                    codiceFiscale = $("#cf").val(),
+                    email = $("#email").val();
+                
+                $.ajax({
+                    url: apiUrl,
+                    method: 'post',
+                    data: {
+                        nome,
+                        cognome,
+                        email,
+                        codiceFiscale
+                    }
+                })
+                .done(function(res) {
+                    alert("MAF salvato correttamente");
+                })
+                .fail(function(result) {
+                    let response = result.responseJSON
+                    if (response.error) {
+                        alert(response.error);
+                    } else {
+                        alert("Errore nella registrazione del MAF")
+                    }
+                })
+            })
+        })
+    </script>
 </body>
 </html>
