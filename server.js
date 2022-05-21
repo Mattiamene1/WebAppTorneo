@@ -18,6 +18,9 @@ app.get("/registrati.html", (req, res) => {
 app.get("/registratiMAF.html", (req, res) => {
     res.sendFile(path.resolve(__dirname, "frontend", "registratiMAF.html"));
 });
+app.get("/loginMAF.html", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "loginMAF.html"));
+});
 app.get("/*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "frontend", "index.html"));
 });
