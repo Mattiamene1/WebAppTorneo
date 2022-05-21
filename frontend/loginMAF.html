@@ -96,8 +96,8 @@
             })
             .fail(function(result) {
                 let response = result.responseJSON
-                if (response && response.error) {
-                    alert(response.error);
+                if (response && response.message) {
+                    alert(response.message);
                 } else {
                     alert("Errore nel login del MAF")
                 }
