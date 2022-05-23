@@ -2,18 +2,18 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Candidatura Arbitro</title>
+    <title>Iscrizione Squadra</title>
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/ModificaStyle.css">
 </head>
 
 <body>
-    <!-- Header PAGINA DI CANDIDATURA ARBITRO -->
+    <!-- Header Iscrizione Squadra -->
     <section>
         <div class="main-banner" id="top">
             <div class="caption" bgcolour="grey">
-               <h2>Pagina di Cadidatura<em><br> Arbitro</em></h2>
+               <h2>Pagina di Iscrizione<em><br> Squadra</em></h2>
             </div>
         </div>
     </section>
@@ -21,8 +21,37 @@
     <section class="body-form">
         <div class="container">
             <div class="form-type">
-                <em>Inserire i propri dati completando tutti i campi richiesti.</em>
+                <em>Inserire i propri dati e quelli dei componenti della squadra completando tutti i campi richiesti.</em>
                 <br>
+                <form id="formSquadra">
+                    <label for="TeName" >Nome Squadra: *</label><br>
+                    <input type="text" id="TeName" name="TeamName" required><br><br>
+                    <label for="numPlayers" >Numero Giocatori da Iscrivere: *</label><br>
+                    <select id="numPlayers" name="numberOfPlayers" form="formSquadra" required><br><br>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select><br>&nbsp;<br>
+                    <input type="submit" value="Conferma" id="submitTeam"><br>&nbsp;<br>
+                </form>
+            </div>
+        </div>
+        <br>&nbsp;<br>    
+        <script>
+            var numPlayers = document.getElementById("numPlayers");
+            var indexSelected = numPlayers.selectedIndex;
+
+            var valueSelected = numPlayers.options[indexSelected];
+            var value = valueSelected.value;
+            
+            //document.write(document.getElementById("numPlayers").innerHTML)
+            document.write(value).value
+        </script>     
+        <div class="container">
+            <div class="form-type">
                 <form id="myform">
                     <label for="fname" >Nome: *</label><br>
                     <input type="text" id="fname" name="name" required><br><br>
@@ -33,13 +62,9 @@
                     <label for="mail">Email: (Google) *</label><br>
                     <input type="email" id="email" name="email" pattern=".+@gmail\.com" size="30" required><br>                 
                 
-                    <label for="sezione" >Sezione:</label><br>
-                    <input type="text" id="sezione" name="sezione"><br><br>
-                    <label for="codicePatentino" >Codice patentino:</label><br>
-                    <input type="text" id="codicePatentino" name="codicePatentino"><br><br><br>
                     <input type="checkbox" id="privacy" name="privacy" value="privacy" required>
                     <label for="privacy">Dichiaro di aver letto l'<a target="_blank" href="#">informativa sulla privacy</a> ai sensi del GDPR e do il consenso al trattamento dei dati personali.</label><br>
-                    <input type="submit" value="Submit" id="submit"><br> 
+                    <input type="submit" value="avanti" id="submitPlayers"><br>&nbsp;<br>
                 </form>
             </div>
         </div>
@@ -48,6 +73,7 @@
     <br>
     </section>
 
+    <!-- Script jquery 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
         const apiUrl = "http://localhost:3000/api/v1/arbitro"
@@ -88,5 +114,6 @@
             })
         })
     </script>
+    -->
 </body>
 </html>

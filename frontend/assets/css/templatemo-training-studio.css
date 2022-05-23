@@ -324,13 +324,14 @@ header
 }
 
 .header-area .main-nav .nav li:last-child a:hover {
-  background-color: #f9735b;
+  background-color: #fff;
+  color: #f9735b;
   opacity: 1;
 }
 
 .header-area .main-nav .nav li:hover a,
 .header-area .main-nav .nav li a.active {
-  color: #ed563b!important;
+  color: #ed563b;
   opacity: 1;
 }
 
@@ -460,7 +461,7 @@ header
 }
 
 .header-area.header-sticky .nav li a.active {
-  color: #ed563b;
+  color: #c9c9cf;
 }
 
 @media (max-width: 1200px) {
