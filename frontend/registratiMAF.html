@@ -26,7 +26,10 @@
             <div class="form-type">
                 <em>Inserire i propri dati completando tutti i campi richiesti.</em>
                 <br>
-                <form>
+                <form action="api/v1/maf" method="post" name="regform" id="regform">
+
+                        
+
                     <label for="fname" >Nome: *</label><br>
                     <input type="text" id="fname" name="fname" required><br><br>
                     <label for="lname" >Cognome: *</label><br>
@@ -37,7 +40,8 @@
                     <input type="email" id="mail" name="mail" pattern=".+@gmail\.com" size="30" required><br><br><br>                   
                     <input type="checkbox" id="privacy" name="privacy" value="privacy" required>
                     <label for="privacy">Dichiaro di aver letto l'<a target="_blank" href="#">informativa sulla privacy</a> ai sensi del GDPR e do il consenso al trattamento dei dati personali.</label><br>
-                    <input type="submit" value="Submit"><br> 
+                    <button type="button" onclick="register()">Register</button>
+                    <br>&nbsp;<br> 
                 </form>
             </div>
         </div>
