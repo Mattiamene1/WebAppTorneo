@@ -1,6 +1,0 @@
-db.giocatori.find({golFatti: {$gt: 1}}).sort({golFatti:-1}).pretty();
-
-
-db.giocatori.find().sort({key:-1}).pretty();        //Decrescente
-db.giocatori.find().sort({key:1}).pretty();         //Crescente  
-https://docs.mongodb.com/manual/reference/operator/meta/orderby/#mongodb-operator-metaOp.-orderby
