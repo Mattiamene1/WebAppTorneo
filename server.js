@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require("express");
 const path = require("path");
 
@@ -10,6 +12,19 @@ app.use("/font", express.static(path.resolve(__dirname, "frontend", "assets", "f
 app.use("/images", express.static(path.resolve(__dirname, "frontend", "assets", "images")));
 app.use("/js", express.static(path.resolve(__dirname, "frontend", "assets", "js")));
 
+app.get("/registrati.html", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "registrati.html"));
+});
+app.get("/registratiMAF.html", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "registratiMAF.html"));
+});
+app.get("/loginMAF.html", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "loginMAF.html"));
+});
+
+app.get("/registratiArbitro.html", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "registratiArbitro.html"));
+});
 app.get("/*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "frontend", "index.html"));
 });

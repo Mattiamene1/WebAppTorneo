@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Registrazione Manager Della Federazione</title>
+    <title>Registrazione Arbitro</title>
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/ModificaStyle.css">
@@ -13,7 +13,7 @@
     <section>
         <div class="main-banner" id="top">
             <div class="caption" bgcolour="grey">
-               <h2>Pagina di Registrazione<em><br> Manager di Federazione</em></h2>
+               <h2>Pagina di Registrazione<em><br> Arbitro</em></h2>
             </div>
         </div>
     </section>
@@ -23,14 +23,7 @@
             <div class="form-type">
                 <em>Inserire i propri dati completando tutti i campi richiesti.</em>
                 <br>
-<<<<<<< HEAD
-                <form action="api/v1/maf" method="post" name="regform" id="regform">
-
-                        
-
-=======
                 <form id="myform">
->>>>>>> 4e9d7f6fc0b594e4347e397b48e02083f5428790
                     <label for="fname" >Nome: *</label><br>
                     <input type="text" id="fname" name="name" required><br><br>
                     <label for="lname" >Cognome: *</label><br>
@@ -38,15 +31,15 @@
                     <label for="cf" >Codice Fiscale: *</label><br>
                     <input type="text" id="cf" name="cf" required>  Non te lo ricordi? <a href="http://www.codicefiscaleonline.com/">Clicca qui</a><br><br>
                     <label for="mail">Email: (Google) *</label><br>
-                    <input type="email" id="email" name="email" pattern=".+@gmail\.com" size="30" required><br><br><br>                   
+                    <input type="email" id="email" name="email" pattern=".+@gmail\.com" size="30" required><br>                 
+                
+                    <label for="sezione" >Sezione:</label><br>
+                    <input type="text" id="sezione" name="sezione"><br><br>
+                    <label for="codicePatentino" >Codice patentino:</label><br>
+                    <input type="text" id="codicePatentino" name="codicePatentino"><br><br><br>
                     <input type="checkbox" id="privacy" name="privacy" value="privacy" required>
                     <label for="privacy">Dichiaro di aver letto l'<a target="_blank" href="#">informativa sulla privacy</a> ai sensi del GDPR e do il consenso al trattamento dei dati personali.</label><br>
-<<<<<<< HEAD
-                    <button type="button" onclick="register()">Register</button>
-                    <br>&nbsp;<br> 
-=======
                     <input type="submit" value="Submit" id="submit"><br> 
->>>>>>> 4e9d7f6fc0b594e4347e397b48e02083f5428790
                 </form>
             </div>
         </div>
@@ -57,7 +50,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
-        const apiUrl = "http://localhost:3000/api/v1/maf"
+        const apiUrl = "http://localhost:3000/api/v1/arbitro"
 
         $(document).ready(function() {
             $("#myform").submit(function(e) {
@@ -65,7 +58,9 @@
                 let nome = $("#fname").val(),
                     cognome = $("#lname").val(),
                     codiceFiscale = $("#cf").val(),
-                    email = $("#email").val();
+                    email = $("#email").val(),
+                    sezione = $("#sezione").val(),
+                    codicePatentino = $("#codicePatentino").val();
                 
                 $.ajax({
                     url: apiUrl,
@@ -74,18 +69,20 @@
                         nome,
                         cognome,
                         email,
-                        codiceFiscale
+                        codiceFiscale,
+                        sezione,
+                        codicePatentino
                     }
                 })
                 .done(function(res) {
-                    alert("MAF salvato correttamente");
+                    alert("Arbitro salvato correttamente");
                 })
                 .fail(function(result) {
                     let response = result.responseJSON
                     if (response.error) {
                         alert(response.error);
                     } else {
-                        alert("Errore nella registrazione del MAF")
+                        alert("Errore nella registrazione dell'arbitro")
                     }
                 })
             })

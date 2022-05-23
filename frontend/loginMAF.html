@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Manager Della Federazione</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/ModificaStyle.css">
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+</head>
+
+<body>
+    <!-- Header PAGINA DI MODIFICA -->
+    <section>
+        <div class="main-banner" id="top">
+            <div class="caption" bgcolour="grey">
+               <h2>Pagina di login<em><br> Manager di Federazione</em></h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="body-form">
+        <div class="container">
+            <div class="form-type" id="firebaseui-auth-container">
+                <button onclick="startLoginWithGoogle()">Login con Google</button>
+            </div>
+        </div>
+    <br>
+    &nbsp;
+    <br>
+    </section>
+
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js'
+        import { getAuth, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/9.8.1/firebase-auth.js'
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD46xfwvlmMImLg6CFQvimlZQlgV15BO4M",
+            authDomain: "ingegneria-del-software-mmr.firebaseapp.com",
+            projectId: "ingegneria-del-software-mmr",
+            storageBucket: "ingegneria-del-software-mmr.appspot.com",
+            messagingSenderId: "1013902569222",
+            appId: "1:1013902569222:web:06eafb83f7a7060b62f887",
+            measurementId: "G-3DSB4LRVDC"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const provider = new GoogleAuthProvider();
+
+        auth.languageCode = 'it';
+
+        function startLoginWithGoogle() {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const credential = GoogleAuthProvider.credentialFromResult(result);
+                    const token = credential.accessToken;
+                    const user = result.user;
+                    // google auth was successful
+                    // i need to check with my backend if the user is the MAF
+                    user.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+                        checkAuthentication(idToken);
+                    });
+                }).catch((error) => {
+                    // Handle Errors here.
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // The email of the user's account used.
+                    const email = error.customData.email;
+                    // The AuthCredential type that was used.
+                    const credential = GoogleAuthProvider.credentialFromError(error);
+                    // ...
+                    console.log(error);
+                    alert(errorMessage);
+                });
+        }
+
+        window.startLoginWithGoogle = startLoginWithGoogle;
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        const apiUrl = "http://localhost:3000/api/v1/maf"
+
+        function checkAuthentication(token) {
+            $.ajax({
+                url: apiUrl,
+                method: 'get',
+                headers: {
+                    'x-access-token': token
+                },
+            })
+            .done(function(res) {
+                alert("MAF autenticato correttamente");
+            })
+            .fail(function(result) {
+                let response = result.responseJSON
+                if (response && response.message) {
+                    alert(response.message);
+                } else {
+                    alert("Errore nel login del MAF")
+                }
+            })
+        }
+    </script>
+</body>
+</html>
