@@ -53,6 +53,7 @@
     </section>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="assets/js/getCookie.js"></script>
     <script>
         //parte di event listener e invio dati
         async function sendData(){
@@ -100,6 +101,9 @@
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 async: false,
+                headers: {
+                    'x-access-token': getCookie("token")
+                },
             })
             .done(function(res) {
                 alert("Torneo creato correttamente");
