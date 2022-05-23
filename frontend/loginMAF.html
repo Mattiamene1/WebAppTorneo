@@ -93,6 +93,8 @@
             })
             .done(function(res) {
                 alert("MAF autenticato correttamente");
+                let tokenCookie= "token="+token;
+                document.cookie=tokenCookie
             })
             .fail(function(result) {
                 let response = result.responseJSON

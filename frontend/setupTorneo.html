@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrazione Arbitro</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/ModificaStyle.css">
+</head>
+
+<body>
+    <!-- Header PAGINA DI MODIFICA -->
+    <section>
+        <div class="main-banner" id="top">
+            <div class="caption" bgcolour="grey">
+               <h2>Pagina di setup<em><br> Torneo</em></h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="body-form">
+        <div class="container">
+            <div class="form-type">
+                <em>Inserisci i dati del torneo</em>
+                <br>
+                <form id="myform">
+                    <label for="fname" >Numero gironi: *</label><br>
+                    <input list="gironi" name ="gironi" id="gironi" required>
+
+                    <datalist id="gironi">
+                        <option value="4">
+                        <option value="8">
+                    </datalist>
+
+                    <p>
+                        le squadre che per ogni girone accedono alle fasi finali sono 1 se il numero di gironi è 8,
+                        è 2 se il numero di gironi è 4.
+                    </p><br><br>
+
+                    <label for="lname" >Numeo squadre (multiplo di 8):  *</label><br>
+                    <input type="text" id="squadre" name="squadre" required><br><br>
+
+                    <label for="cf" >Squadre per girone: *</label><br>
+                    <input type="text" id="spg" name="spg" required>  <br><br>
+
+                    <input type="submit" value="Submit" id="submit"><br> 
+                </form>
+            </div>
+        </div>
+    <br>
+
+    <br>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="assets/js/getCookie.js"></script>
+    <script>
+        //parte di event listener e invio dati
+        async function sendData(){
+            console.log("funzione avviata\n")
+            const apiUrl = "http://127.0.0.1:3000/api/v1/setuptorneo";
+            var g=document.getElementById("gironi").value;    //numero di gironi
+            var s= document.getElementById("squadre").value;  //numero di squadre
+            var spg= document.getElementById("spg").value;    //numero di squadre per girone
+            var af;                                           //numero di squadre che accedono alla fase finale per girone
+
+            //se i gironi sono 4, vanno alle finali 2 squadre per girone, altrimenti 1
+            if(g==4)
+                af=2
+            else
+                af=4
+
+            //se il numero di squadre non è multiplo di 8 ritorno errore
+            if(s%8!=0){
+                alert("il numero di squadre deve essere multiplo di 8")
+                document.getElementById("squadre").focus();
+                return false;
+            }
+
+            //se il numero di squadre totali e quello delle squadre per girone moltiplicato per il numero dei gironi non torna do errore
+            if(spg*g!=s){
+                alert("incongruenza tra numero squadre per girone e numero squadre")
+                document.getElementById("spg").focus();
+                return false;
+            }
+
+            
+
+            //Se va tutto bene invio i dati al backend
+            let data1={
+                gironi:g,
+                squadre:s,
+                squadre_per_girone: spg,
+                a_finali: af
+            }
+
+            $.ajax({
+                url:apiUrl,
+                type: 'POST',
+                data: JSON.stringify(data1),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                async: false,
+                headers: {
+                    'x-access-token': getCookie("token")
+                },
+            })
+            .done(function(res) {
+                alert("Torneo creato correttamente");
+            })
+            
+            .fail(function(result) {
+                let response = result.responseJSON
+                if (response && response.message) {
+                    alert(response.message);
+                } else {
+                    alert("Errore durante la creazione del torneo")
+                }
+            })
+        }
+
+        const form = document.getElementById("myform");
+        form.addEventListener("submit",sendData)
+    </script>
+
+
+  
+   
+
+        
+
+
+
+
+
+
+</body>
+</html>
