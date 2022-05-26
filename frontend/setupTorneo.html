@@ -55,6 +55,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="assets/js/getCookie.js"></script>
     <script>
+        function apriPopup(){
+            var w = 400;
+            var h = 250;
+            var l = Math.floor((screen.width-w)/2);
+            var t = Math.floor((screen.height-h)/2);
+            window.open("avviatorneo.html","",",,top=" + t + ",left=" + l);
+        }
+
+
         //parte di event listener e invio dati
         async function sendData(){
             console.log("funzione avviata\n")
@@ -106,7 +115,7 @@
                 },
             })
             .done(function(res) {
-                alert("Torneo creato correttamente");
+                apriPopup()
             })
             
             .fail(function(result) {
