@@ -8,6 +8,119 @@
     <link rel="stylesheet" href="assets/css/ModificaStyle.css">
 </head>
 
+<script>
+  
+    window.onkeypress = function(event) {  // memsquad() memplayer()
+        if (event.keyCode == 13) {
+            if(teamName && numPlayers){
+                memPlayer();
+            } else {
+                memSquad();
+            }
+            return false;
+        }
+    }
+
+    var numPlayers, teamName, currentPlayer;    // global variables
+    var playersArray = [];
+
+    function memSquad(){
+
+        if(!(document.getElementById("numPlayers").value && document.getElementById("TeName").value)){
+            document.getElementById("TeNameError").classList.remove("noterror");
+            document.getElementById("TeNameError").classList.add("error");
+            return null;
+        }
+
+        numPlayers = document.getElementById("numPlayers").value;
+        teamName = document.getElementById("TeName").value;
+
+        console.log("PRINT_1", "Team: ", teamName, "  Players: ", numPlayers);  /* DEBUGTEST */
+
+        document.getElementById("formSquadraContainer").style.display = "none";
+        document.getElementById("formmyformContainer").style.display = "block";
+
+        currentPlayer = 0;
+
+        playersArray.length = numPlayers;
+
+        trackProgress();
+    }
+
+    function trackProgress(){
+        // console.log("PRINT_2", "Team: ", teamName, "  Players: ", numPlayers);  /* DEBUGTEST */
+        document.getElementById("progressStatus").innerHTML = "You are editing player ";
+        document.getElementById("progressStatus").innerHTML += currentPlayer+1;
+        document.getElementById("progressStatus").innerHTML += " out of ";
+        document.getElementById("progressStatus").innerHTML += numPlayers;
+    }
+
+    function clearPlayerForm(){
+        console.log(" ---  Clearing form --- "); /* DEBUGTEST */
+
+        fname = document.getElementById("fname").value = '';
+        lname = document.getElementById("lname").value = '';
+        cf = document.getElementById("cf").value = '';
+        email = document.getElementById("email").value = '';
+        privacy = document.getElementById("privacy").checked = false;
+    }
+
+    function memPlayer(){
+        var fname = document.getElementById("fname").value;
+        var lname = document.getElementById("lname").value;
+        var cf = document.getElementById("cf").value;
+        var email = document.getElementById("email").value;
+        var privacy = document.getElementById("privacy").checked;
+
+        console.log("PRINT_3", "N: ", fname, " C: ", lname, " cf: ", cf, " email: ", email, " privacy: ", privacy);  /* DEBUGTEST */
+
+        playersArray[currentPlayer] = new Array(fname, lname, cf, email, privacy);
+
+        currentPlayer++;
+        trackProgress();
+        clearPlayerForm();
+
+        if(currentPlayer == numPlayers){
+            endForm();
+        }
+    }
+
+    function endForm(){
+    console.log("Array length:", playersArray.length);
+    console.log(" --- BEGIN ARRAY PRINT ---");  /* DEBUGTEST */
+    for(i=0; i<numPlayers; i++)
+        console.log(playersArray[i][0] , " " , playersArray[i][1] , " " , playersArray[i][2] , " " , playersArray[i][3] , " " , playersArray[i][4]);  /* DEBUGTEST */
+    console.log(" --- END ARRAY PRINT ---");  /* DEBUGTEST */
+
+    document.getElementById("endFormContainer").innerHTML += "<br />\nI giocatori della squadra [";
+    document.getElementById("endFormContainer").innerHTML += teamName;
+    document.getElementById("endFormContainer").innerHTML += "] che hai inserito sono: <br /> \n";
+    for(i=0; i<numPlayers; i++){
+        document.getElementById("endFormContainer").innerHTML += playersArray[i][0]; //nome
+        document.getElementById("endFormContainer").innerHTML += " ";
+        document.getElementById("endFormContainer").innerHTML += playersArray[i][1]; //cognome
+        document.getElementById("endFormContainer").innerHTML += " ";
+        document.getElementById("endFormContainer").innerHTML += playersArray[i][2]; //CF
+        document.getElementById("endFormContainer").innerHTML += " ";
+        document.getElementById("endFormContainer").innerHTML += playersArray[i][3]; //mail
+        document.getElementById("endFormContainer").innerHTML += " ";
+        document.getElementById("endFormContainer").innerHTML += playersArray[i][4]; //privacy
+        document.getElementById("endFormContainer").innerHTML += " <br /> \n";
+    }
+      
+
+    document.getElementById("formmyformContainer").style.display = "none";
+    document.getElementById("endFormContainer").style.display = "block";
+  }
+
+
+
+
+
+
+
+</script>
+
 <body>
     <!-- Header Iscrizione Squadra -->
     <section>
@@ -19,15 +132,17 @@
     </section>
 
     <section class="body-form">
-        <div class="container">
+        <div class="container" id="formSquadraContainer">
             <div class="form-type">
                 <em>Inserire i propri dati e quelli dei componenti della squadra completando tutti i campi richiesti.</em>
                 <br>
                 <form id="formSquadra">
                     <label for="TeName" >Nome Squadra: *</label><br>
-                    <input type="text" id="TeName" name="TeamName" required><br><br>
+                    <input type="text" id="TeName" name="TeamName" required><br />
+                    <span id="TeNameError" class="noterror">Campo richiesto</span><br /><br />
                     <label for="numPlayers" >Numero Giocatori da Iscrivere: *</label><br>
                     <select id="numPlayers" name="numberOfPlayers" form="formSquadra" required><br><br>
+                        <option value="2">2</option>  /* DEBUGTEST */
                         <option value="5">5</option>
                         <option value="6">6</option>
                         <option value="7">7</option>
@@ -35,24 +150,21 @@
                         <option value="9">9</option>
                         <option value="10">10</option>
                     </select><br>&nbsp;<br>
-                    <input type="submit" value="Conferma" id="submitTeam"><br>&nbsp;<br>
+                    <!-- <input type="submit" value="Conferma" id="submitTeam" onclick="a()"><br>&nbsp;<br> OldButtonForm -->
+                    <button type="button" onclick="memSquad()">Invia dati</button>
                 </form>
             </div>
         </div>
-        <br>&nbsp;<br>    
+        <br>&nbsp;<br>
         <script>
-            var numPlayers = document.getElementById("numPlayers");
-            var indexSelected = numPlayers.selectedIndex;
 
-            var valueSelected = numPlayers.options[indexSelected];
-            var value = valueSelected.value;
-            
-            //document.write(document.getElementById("numPlayers").innerHTML)
-            document.write(value).value
-        </script>     
-        <div class="container">
+
+            //document.write(value).value
+        </script>
+        <div class="container" id="formmyformContainer" style="display:none;">
             <div class="form-type">
                 <form id="myform">
+                    <div id="progressStatus">PLACEHOLDERTEXT</div>
                     <label for="fname" >Nome: *</label><br>
                     <input type="text" id="fname" name="name" required><br><br>
                     <label for="lname" >Cognome: *</label><br>
@@ -60,23 +172,27 @@
                     <label for="cf" >Codice Fiscale: *</label><br>
                     <input type="text" id="cf" name="cf" required>  Non te lo ricordi? <a href="http://www.codicefiscaleonline.com/">Clicca qui</a><br><br>
                     <label for="mail">Email: (Google) *</label><br>
-                    <input type="email" id="email" name="email" pattern=".+@gmail\.com" size="30" required><br>                 
-                
+                    <input type="email" id="email" name="email" pattern=".+@gmail\.com" size="30" required><br>
+
                     <input type="checkbox" id="privacy" name="privacy" value="privacy" required>
                     <label for="privacy">Dichiaro di aver letto l'<a target="_blank" href="#">informativa sulla privacy</a> ai sensi del GDPR e do il consenso al trattamento dei dati personali.</label><br>
-                    <input type="submit" value="avanti" id="submitPlayers"><br>&nbsp;<br>
+                    <!-- <input type="submit" value="avanti" id="submitPlayers"><br>&nbsp;<br> -->
+                    <button type="button" onclick="memPlayer()">Avanti</button>
                 </form>
             </div>
+        </div>
+        <div class="container" id="endFormContainer" style="display:none;">
+          Fine dell'inserimento squadra.
         </div>
     <br>
     &nbsp;
     <br>
     </section>
 
-    <!-- Script jquery 
+    <!-- Script jquery
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
-        const apiUrl = "http://localhost:3000/api/v1/arbitro"
+        const apiUrl = "http://localhost:3000/api/v1/squadra"
 
         $(document).ready(function() {
             $("#myform").submit(function(e) {
@@ -85,30 +201,26 @@
                     cognome = $("#lname").val(),
                     codiceFiscale = $("#cf").val(),
                     email = $("#email").val(),
-                    sezione = $("#sezione").val(),
-                    codicePatentino = $("#codicePatentino").val();
-                
+
                 $.ajax({
                     url: apiUrl,
                     method: 'post',
                     data: {
                         nome,
                         cognome,
-                        email,
                         codiceFiscale,
-                        sezione,
-                        codicePatentino
+                        email
                     }
                 })
                 .done(function(res) {
-                    alert("Arbitro salvato correttamente");
+                    alert("Giocatori Salvati correttamente");
                 })
                 .fail(function(result) {
                     let response = result.responseJSON
                     if (response.error) {
                         alert(response.error);
                     } else {
-                        alert("Errore nella registrazione dell'arbitro")
+                        alert("Errore nella registrazione della squadra")
                     }
                 })
             })
