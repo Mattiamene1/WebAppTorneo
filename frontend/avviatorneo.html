@@ -2,17 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Modifica</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/ModificaStyle.css">
+    <script>
+        function attivatorneo(){
+            const apiUrl = "http://127.0.0.1:3000/api/v2/avviatorneo";
+            $.ajax({
+                url:apiUrl,
+                type: 'PUT',
+                async: false,
+                headers: {
+                    'x-access-token': getCookie("token")
+                },
+            })
+            .done(function(res) {
+                alert("Torneo Avviato!");
+            })
+            
+            .fail(function(result) {
+                let response = result.responseJSON
+                if (response && response.message) {
+                    alert(response.message);
+                } else {
+                    alert("Errore durante l'avviamento del torneo")
+                }
+            })
+        }
+
+    </script>
 </head>
 
-<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
-<link rel="stylesheet" href="assets/css/ModificaStyle.css">
+
 
 <body>
 
     <form>
-        <input type="button" value="attiva torneo" onclick="">
+        <input type="button" value="attiva torneo" onclick=attivatorneo()>
         <input type="button" value="attiva più tardi" onclick="">
     </form>
 
