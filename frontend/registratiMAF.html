@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/ModificaStyle.css">
+    <script src="./script.js"></script>
 </head>
 
 <body>
@@ -36,9 +37,8 @@
                     <input type="checkbox" id="privacy" name="privacy" value="privacy" required>
                     <label for="privacy">Dichiaro di aver letto l'<a target="_blank" href="#">informativa sulla privacy</a> ai sensi del GDPR e do il consenso al trattamento dei dati personali.</label><br>
 
-                    <button type="button" onclick="register()">Register</button>
                     <br>&nbsp;<br> 
-                    <input type="submit" value="Submit" id="submit"><br> 
+                    <input type="submit" value="Registrati" id="submit"><br> 
 
                 </form>
             </div>
@@ -50,8 +50,6 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
-        const apiUrl = "http://localhost:8080/api/v1/maf"
-
         $(document).ready(function() {
             $("#myform").submit(function(e) {
                 e.preventDefault();
@@ -61,7 +59,7 @@
                     email = $("#email").val();
                 
                 $.ajax({
-                    url: apiUrl,
+                    url: API_V1 + "maf",
                     method: 'post',
                     data: {
                         nome,

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Approvazione arbitri</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/ModificaStyle.css">
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+</head>
+
+<body>
+    <!-- Header PAGINA DI MODIFICA -->
+    <section>
+        <div class="main-banner" id="top">
+            <div class="caption" bgcolour="grey">
+               <h2>Approvazione arbitri</h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="body-form" id="app">
+        <div class="container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nome e cognome</th>
+                        <th>Indirizzo e-mail</th>
+                        <th>Sezione e codice patentino</th>
+                        <th>Approva</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="arbitro in arbitri">
+                        <td>{{ arbitro.nome }} {{ arbitro.cognome }}</td>
+                        <td>{{ arbitro.email }}</td>
+                        <td>{{ arbitro.sezione }} {{ arbitro.codicePatentino }}</td>
+                        <td><button @click="approva(arbitro)">Approva</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    <br>
+    &nbsp;
+    <br>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="./script.js"></script>
+    <script>
+        const { createApp } = Vue
+      
+        createApp({
+          data() {
+            return {
+              arbitri: []
+            };
+          },
+          methods: {
+            loadData: function() {
+                let vm = this;
+                $.ajax({
+                    url: API_V2 + "arbitridaapprovare",
+                    headers: {
+                        'X-Access-token': AUTH_TOKEN
+                    },
+                    success: function(res) {
+                        vm.arbitri = res.data;
+                    }
+                })
+            },
+            approva: function(arbitro) {
+                let vm = this;
+                $.ajax({
+                    url: API_V2 + "approvaarbitro/" + arbitro._id,
+                    method: 'PUT',
+                    headers: {
+                        'X-Access-token': AUTH_TOKEN
+                    },
+                }).done(function(res) {
+                    alert("Arbitro approvato con successo");
+                    vm.loadData();
+                }).fail(function(result) {
+                    let response = result.responseJSON
+                    if (response && response.error) {
+                        alert(response.error);
+                    } else {
+                        alert("Errore nell'approvazione")
+                    }
+                })
+            }
+          },
+          mounted: function() {
+            login();
+            this.loadData();
+          }
+        }).mount('#app')
+      </script>
+</body>
+</html>
