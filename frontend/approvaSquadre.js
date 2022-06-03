@@ -1,26 +1,31 @@
 async function loadSquadre(){
-    var apiUrl="http://127.0.0.1:8080/api/v2/mostraiscrizionisquadre"
-    await fetch(apiUrl,{
-        headers: {
-            'x-access-token': getCookie("token")
-        }
-    })//creo la richiesta inserendo il token
-    .then(res=>res.json())
-    .then(function(res) { //carica tutte le squadre e i giocatori
-        //var squadre=JSON.parse(res)
-        var squadre=res;
-        for(var i=0;i<squadre.length;i++){
-            addsquadra(squadre[i],i);
-        }
-        
-    })
-    .catch(function(result) {
-        alert("Errore durante il caricamento delle squadre")
-        console.log(result)
-    })
+    token=getCookie("token")
+
+    if(token){ //controllo il token, se non c'è non posso fare nulla
+        var apiUrl="http://127.0.0.1:8080/api/v2/mostraiscrizionisquadre"
+        await fetch(apiUrl,{
+            headers: {
+                'x-access-token': token
+            }
+        })//creo la richiesta inserendo il token
+        .then(res=>res.json())
+        .then(function(res) { //carica tutte le squadre e i giocatori
+            //var squadre=JSON.parse(res)
+            var squadre=res;
+            for(var i=0;i<squadre.length;i++){
+                addsquadra(squadre[i],i,token);
+            }
+            
+        })
+        .catch(function(result) {
+            alert("Errore durante il caricamento delle squadre")
+            console.log(result)
+        })
+    }
 }
 
-async function addsquadra(squadra,index){
+async function addsquadra(squadra,index,token){
+
     var contenitore=document.getElementById("squadre");
     var i = document.createElement('div');
     var titolosquadre=document.createElement("h2");
@@ -61,13 +66,13 @@ async function addsquadra(squadra,index){
             gio.appendChild(titologioc)
             gio.appendChild(g)  
         });
-             
+            
     } 
     contenitore.appendChild(titolosquadre)
     contenitore.appendChild(i);
     contenitore.appendChild(bottoneApprova)
     contenitore.appendChild(divisore)
-    
+
     
 }
 
@@ -87,23 +92,31 @@ async function loadGiocatore(id){
 }
 
 async function approvaSquadra(id){
-    var apiUrl="http://127.0.0.1:8080/api/v2/approvazionesquadra/"+id
+    var apiUrl="http://127.0.0.1:8080/api/v2/squadre/"+id+"/approva"
 
-    await fetch(apiUrl,{
-                            method: 'PUT',
-                            headers: {
-                                'x-access-token': getCookie("token")
-                            }
-    })
-    .then(res=>res.json())
-    .then(function(res) { //restituisci giocatore
+    token=getCookie("token")
+
+    if(token){
+        await fetch(apiUrl,{
+            method: 'PUT',
+            headers: {
+                'x-access-token': token
+            }
+        })
+        .then(res=>res.json())
+        .then(function(res) { //restituisci giocatore
         if(res.success)
-            alert("squadra iscritta correttamente")
+        alert("squadra iscritta correttamente")
         else
-            alert(res.error)
-    })
-    .catch(function(result) {
+        alert(res.error)
+        })
+        .catch(function(result) {
         alert("Errore nel caricamento del giocatore "+apiUrl);
         return
-    })
+        })
+    }
+    else{
+        alert("utente non autenticato, impossibile approvare squadra")
+    }
+
 }
