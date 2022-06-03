@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <title>Visualizzazione Partite</title>
+    </head>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/ModificaStyle.css">
+
+    <body>
+        <!-- Header PAGINA VISUALIZZAZIONE PARTITE -->
+        <section>
+            <div class="main-banner" id="top">
+                <div class="caption" bgcolour="grey">
+                <h2>Visualizzazione <em> Partite</em></h2>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3>Partite Girone</h3>              
+            <div id="girone">
+                <!-- Create here -->
+            </div>   
+        </section>
+
+        <section>
+            <h3>Partite Tabellone</h3>
+            <div id="tabellone">
+                <!-- Create here -->
+            </div>
+        </section>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script>
+
+            async function getData(){
+                const apiUrl = "http://localhost:8080/api/v2/partite"
+                const responseApi = await fetch(apiUrl)                     // Get API               
+                const response = await responseApi.json();                  // Json to js variable
+                
+                console.log(response);                                      // Log tutte le partite
+                console.log('Elements to print:' + response.length);        // Log Numero Partite
+
+                for(i=0;i<response.length;i++){
+                    if(response[i].fase.localeCompare('gironi')==0){
+                        var gironeContainer = document.getElementById("girone");
+                        var divGironi=document.createElement("div");
+                        var idContainerGir = 'partitaGironi_'+i;
+                        divGironi.setAttribute('id', idContainerGir);
+                        divGironi.innerHTML = ' | LUOGO: ' + response[i].luogo + ' | CASA: ' + response[i].casa + ' | OSPITE: ' + response[i].ospite + ' | ARBITRO: ' + response[i].arbitro + ' | FASE: ' + response[i].fase;               
+                        gironeContainer.appendChild(divGironi);
+
+                        /*button
+                        var insertButtonGir = document.createElement("button");
+                        var idBottoneGir = 'BottonePartitaGirone_'+i;                  // ID div creato per apposita partita
+                        insertButtonGir.setAttribute('id', idBottoneGir);
+                        insertButtonGir.innerHTML = "insert";                      
+                        divGironi.appendChild(insertButtonGir)
+                        */
+                    }else if(response[i].fase.localeCompare('tabellone')==0){
+                        var tabContainer = document.getElementById("tabellone");
+                        var divTab=document.createElement("div");
+                        var idContainerTab = 'partitaTabellone_'+i;                  // ID div creato per apposita partita
+                        divTab.setAttribute('id', idContainerTab);                   // Assegnazione ID al div
+                        divTab.innerHTML = ' | LUOGO: ' + response[i].luogo + ' | CASA: ' + response[i].casa + ' | OSPITE: ' + response[i].ospite + ' | ARBITRO: ' + response[i].arbitro + ' | FASE: ' + response[i].fase;               
+                        tabContainer.appendChild(divTab);
+                        /*button
+                        var insertButtonTab = document.createElement("button");
+                        var idBottoneTab = 'BottonePartitaTabellone_'+i;                  // ID div creato per apposita partita
+                        insertButtonTab.setAttribute('id', idBottoneTab);
+                        insertButtonTab.innerHTML = "insert";                      
+                        divTab.appendChild(insertButtonTab)
+                        */
+                    }                 
+                }                
+            }
+            getData();
+        </script>
+    </body>
+</html>
