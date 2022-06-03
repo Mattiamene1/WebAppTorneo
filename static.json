@@ -1,3 +1,11 @@
 {
-    "root": "frontend/"
+    "root": "frontend/",
+    "proxies": {
+        "/api/v1/": {
+          "origin": "https://ingegneriadelsoftware.herokuapp.com/api/v1/"
+        },
+        "/api/v2/": {
+            "origin": "https://ingegneriadelsoftware.herokuapp.com/api/v2/"
+          }
+      }
 }
