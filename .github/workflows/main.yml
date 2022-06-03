@@ -28,7 +28,7 @@ jobs:
 
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          buildpack: heroku-buildpack-static
+          buildpack: https://github.com/heroku/heroku-buildpack-static.git
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "ids-frontend" #Must be unique in Heroku
           heroku_email: "riccardo.gilli@studenti.unitn.it"
