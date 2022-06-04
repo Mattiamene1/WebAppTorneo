@@ -1,0 +1,52 @@
+<html>
+    <head>
+        
+        <title>Aggiungi partita</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+        <link rel="stylesheet" href="assets/css/ModificaStyle.css">
+        <script src="aggiungiPartita.js"></script>
+        <script src="getCookie.js"></script>
+    </head>
+
+    <body>
+        <section>
+            <div class="main-banner" id="top">
+                <div class="caption" bgcolour="grey">
+                   <h2>Programmazione partite<em><br>Crea una nuova partita</em></h2>
+                </div>
+            </div>
+        </section>
+        
+        <form id="myform"></form>
+            <p>Squadra di casa: </p>
+            <input type="text" name="casa" id="casa">
+            
+            <p>Squadra ospite: </p>
+            <input type="text" name="ospite" id="ospite">
+            
+            <p>Luogo: </p>
+            <input type="text" name="luogo" id="luogo">
+            
+            <p>Data: </p>
+            <input type="text" name="data" id="data">
+            
+            <p>Arbitro: </p>
+            <p>nome: </p><input type="text" name="arbitro" id="arbitronome">
+            <p>cognome: </p><input type="text" name="arbitro" id="arbitrocognome">
+            <p>CF: </p><input type="text" name="arbitro" id="arbitrocf">
+            
+            <p>Fase: </p>
+            <select name="fase" id="fase">
+                <option value="gironi">Gironi</option>
+                <option value="tabellone">Tabellone</option>
+            </select>
+        </form>
+        <br><br>
+        <button onclick="sendData();">Invia dati</button>
+        <br><br>
+        <button onclick="clear();">Nuovo inserimento</button>
+        <br><br>
+        <button onclick="backToHome();">torna alla home</button>        
+    </body>
+</html>
