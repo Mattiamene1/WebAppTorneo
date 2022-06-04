@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inserimento Referto</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+<link rel="stylesheet" href="assets/css/ModificaStyle.css">
+
+<body>
+    <!-- Header PAGINA DI inserimento Referto -->
+    <section>
+        <div class="main-banner" id="top">
+            <div class="caption" bgcolour="grey">
+               <h2>Inserimento <em> del Referto</em></h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sezione Dati -->
+    <section class="body-form">
+        <div class="container">
+            <div class="form-type">
+                <em>Inserire il referto della partita completando tutti i campi.</em>
+                <br>
+                <div width="900">
+                    <form>                 
+                        <table>
+                            <tr>
+                                <td>
+                                    <label for="casaScore">Goal Casa:</label><br>
+                                    <input size="25" type="number" min="0" id="casaScore" name="casaScore" required>
+                                </td>
+                                <td><br/></td>
+                                <td>
+                                    <label for="ospiteScore">Goal Ospite:</label><br>
+                                    <input size="25" type="number" min="0" id="ospiteScore" name="ospiteScore" required>
+                                </td>   
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="marcatoriCasa" >Marcatori Casa:</label><br>
+                                    <select id="marcatoriCasa" multiple>
+                                        <option>Inter</option>
+                                        <!-- To be add -->
+                                    </select>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <label for="marcatoriOspite" >Marcatori Ospite:</label><br>
+                                    <select id="marcatoriOspite" multiple>
+                                        <option>Milan</option>
+                                        <!-- To be add -->
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <br/>
+                    <button type="button" onclick="print()">Inserisci</button>
+                </div>
+            </div>
+        </div>
+    <br>
+    &nbsp;
+    <br>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="getCookie.js"></script>
+    <script>
+        function print(){
+            var partitaId = document.getElementById("idPartita").value
+            var ngoalCasa = document.getElementById("casaScore").value;
+            var ngoalOspite = document.getElementById("ospiteScore").value;
+
+            console.log(partitaId, " ", ngoalCasa, " - ", ngoalOspite)
+        }
+
+        
+
+
+        async function sendData(){
+            console.log("funzione inserimento referto avviata\n")
+            const apiUrl = "http://127.0.0.1:8080/api/v2/inserimentoReferto";   //????????
+            var partitaId = document.getElementById("idPartita").value
+            var ngoalCasa = document.getElementById("casaScore").value;
+            var ngoalOspite = document.getElementById("ospiteScore").value;
+
+            //invio i dati al backend
+            let data1={
+                partitaRiferimento: partitaId,
+                goalCasa:  ngoalCasa,
+                goalOspite: ngoalOspite,
+                //marcatori: Array
+            }
+
+            $.ajax({
+                url:apiUrl,
+                type: 'POST',
+                data: JSON.stringify(data1),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                async: false,
+                headers: {
+                    'x-access-token': getCookie("token")
+                },
+            })
+            .done(function(res) {
+                apriPopup()
+            })
+            
+            .fail(function(result) {
+                let response = result.responseJSON
+                if (response && response.message) {
+                    alert(response.message);
+                } else {
+                    alert("Errore durante l invio dei dati")
+                }
+            })
+        }
+
+        //print();
+    </script>
+</body>
+</html>

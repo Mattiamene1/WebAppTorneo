@@ -50,22 +50,25 @@
                         var divGironi=document.createElement("div");
                         var idContainerGir = 'partitaGironi_'+i;
                         divGironi.setAttribute('id', idContainerGir);
-                        divGironi.innerHTML = ' | LUOGO: ' + response[i].luogo + ' | CASA: ' + response[i].casa + ' | OSPITE: ' + response[i].ospite + ' | ARBITRO: ' + response[i].arbitro + ' | FASE: ' + response[i].fase;               
+                        divGironi.innerHTML = ' | LUOGO: ' + response[i].luogo + ' | CASA: ' + response[i].casa + ' | OSPITE: ' + response[i].ospite + ' | ARBITRO: ' + response[i].arbitro + ' | FASE: ' + response[i].fase + " | ";               
+                        console.log(response[i].casa, " VS ", response[i].ospite, " ID: ", response[i]._id);
                         gironeContainer.appendChild(divGironi);
-
-                        /*button
+                        
+                        //**********BUTTON*******************
                         var insertButtonGir = document.createElement("button");
                         var idBottoneGir = 'BottonePartitaGirone_'+i;                  // ID div creato per apposita partita
                         insertButtonGir.setAttribute('id', idBottoneGir);
+                        insertButtonGir.setAttribute('onclick', href='inserimentoReferto.html');       //Apri pagina inserimentoReferto.html
                         insertButtonGir.innerHTML = "insert";                      
                         divGironi.appendChild(insertButtonGir)
-                        */
+                        //************************************
+
                     }else if(response[i].fase.localeCompare('tabellone')==0){
                         var tabContainer = document.getElementById("tabellone");
                         var divTab=document.createElement("div");
                         var idContainerTab = 'partitaTabellone_'+i;                  // ID div creato per apposita partita
                         divTab.setAttribute('id', idContainerTab);                   // Assegnazione ID al div
-                        divTab.innerHTML = ' | LUOGO: ' + response[i].luogo + ' | CASA: ' + response[i].casa + ' | OSPITE: ' + response[i].ospite + ' | ARBITRO: ' + response[i].arbitro + ' | FASE: ' + response[i].fase;               
+                        divTab.innerHTML = ' | LUOGO: ' + response[i].luogo + ' | CASA: ' + response[i].casa + ' | OSPITE: ' + response[i].ospite + ' | ARBITRO: ' + response[i].arbitro + ' | FASE: ' + response[i].fase + " | ";               
                         tabContainer.appendChild(divTab);
                         /*button
                         var insertButtonTab = document.createElement("button");
