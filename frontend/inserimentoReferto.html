@@ -87,7 +87,7 @@
             const apiUrlPartite = "http://localhost:8080/api/v2/partite";
             const responseApiPartite = await fetch(apiUrlPartite);                     // Get API               
             const responsePartite = await responseApiPartite.json();
-            const idMatch = localStorage.getItem('ID-PARTITA_2');                       //DA CAPIRE COME PRNDER EL ID SELEZIONATO
+            const idMatch = localStorage.getItem('ID_PARTITA_');
             console.log("MATCH SELECTED: ", idMatch );
 
             //Search By ID the choosen match
@@ -179,11 +179,6 @@
             var ngoalOspite = document.getElementById("ospiteScore").value;
 
 
-
-            //const idMatch = localStorage.getItem(ID-PARTITA_2);
-
-
-
             document.getElementById("idPartita").innerHTML=casa;
             document.getElementById("casaScore").innerHTML=ospite;
             document.getElementById("ospiteScore").innerHTML=arbitro;
@@ -222,8 +217,6 @@
                 }
             })
         }
-
-        //print();
     </script>
 </body>
 </html>

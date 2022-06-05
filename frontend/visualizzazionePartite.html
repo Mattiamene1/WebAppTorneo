@@ -33,6 +33,8 @@
             </div>
         </section>
 
+        <button onClick="window.location.href=window.location.href">Annulla</button>
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script>
 
@@ -57,16 +59,33 @@
                         console.log(response[i].casa, " VS ", response[i].ospite, " ID: ", response[i]._id);
                         gironeContainer.appendChild(divGironi);
                         
-                        //*************INPUT TABELLONE *****************
-                        var insertSubmitGir = document.createElement("input");
+                        //*************SELEZIONA TABELLONE *****************
+                        var selectSubmitGir = document.createElement("input");
                         var idSubmitGir = 'SubmitPartitaGirone_'+i;                         // ID div creato per apposita partita
                         const idPartitaDB = response[i]._id;                                // ID Partita nel DB
 
+                        selectSubmitGir.setAttribute('id', idPartitaDB);                    //Assegno L'ID della partita al bottone
+                        selectSubmitGir.setAttribute('type', "button");
+                        selectSubmitGir.setAttribute('value', "select");                      
+                        divGironi.appendChild(selectSubmitGir);
+                        //**************************************************
+
+                        //*************INSERISCI REFERTO *******************
+                        var insertSubmitGir = document.createElement("input");
+
                         insertSubmitGir.setAttribute('id', idPartitaDB);                    //Assegno L'ID della partita al bottone
                         insertSubmitGir.setAttribute('type', "submit");
-                        insertSubmitGir.setAttribute('value', "insert");                      
+                        insertSubmitGir.setAttribute('value', "insert");    
+                        insertSubmitGir.setAttribute('onclick', "actions()");
                         divGironi.appendChild(insertSubmitGir);
-                        //************************************
+                        //**************************************************
+
+
+
+
+
+
+
 
                     }else if(response[i].fase.localeCompare('tabellone')==0){
                         var tabContainer = document.getElementById("tabellone");
@@ -90,15 +109,18 @@
 
                 }  
                 for(i=0;i<response.length;i++){
-                    idp = response[i]._id
-                    console.log("Index Of Buttons", idp, " Cycle: " , i);
+                    idp = response[i]._id;
                     const buttonFeature = document.getElementById(idp);
                     
                     buttonFeature.addEventListener('click', () => {
-                        console.log("Button selected: ",buttonFeature.id, " @ index:", i);
+                        console.log("Button selected: ",buttonFeature.id);
                     });
-                    buttonFeature.setAttribute("onclick", "localStorage.setItem(\"ID_PARTITA_\", idp);");                 
+                    //actions(idp);
+                    buttonFeature.setAttribute("onclick", "localStorage.setItem(\"ID_PARTITA_\", id);");                 
                 }
+            }
+            function actions(){
+                location.href = 'inserimentoReferto.html';
             }
             getData();
         </script>
