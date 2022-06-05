@@ -9,84 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="getCookie.js"></script>
     <script src="./script.js"></script>
-    <script>
-        function apriPopup(){
-            var w = 100;
-            var h = 50;
-            var l = Math.floor((screen.width-w)/2);
-            var t = Math.floor((screen.height-h)/2);
-            window.open("avviatorneo.html","",",,top=" + t + ",left=" + l);
-        }
-
-
-        //parte di event listener e invio dati
-        async function sendData(){
-            console.log("funzione avviata\n")
-            const apiUrl = API_V1+"setuptorneo";
-            var g=document.getElementById("gironi").value;    //numero di gironi
-            var s= document.getElementById("squadre").value;  //numero di squadre
-            var spg= document.getElementById("spg").value;    //numero di squadre per girone
-            var af;                                           //numero di squadre che accedono alla fase finale per girone
-
-            //se i gironi sono 4, vanno alle finali 2 squadre per girone, altrimenti 1
-            if(g==4)
-                af=2
-            else
-                af=4
-
-            //se il numero di squadre non è multiplo di 8 ritorno errore
-            if(s%8!=0){
-                alert("il numero di squadre deve essere multiplo di 8")
-                document.getElementById("squadre").focus();
-                return false;
-            }
-
-            //se il numero di squadre totali e quello delle squadre per girone moltiplicato per il numero dei gironi non torna do errore
-            if(spg*g!=s){
-                alert("incongruenza tra numero squadre per girone e numero squadre")
-                document.getElementById("spg").focus();
-                return false;
-            }
-
-            
-
-            //Se va tutto bene invio i dati al backend
-            let data1={
-                gironi:g,
-                squadre:s,
-                squadre_per_girone: spg,
-                a_finali: af
-            }
-
-            $.ajax({
-                url:apiUrl,
-                type: 'POST',
-                data: JSON.stringify(data1),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                async: false,
-                headers: {
-                    'x-access-token': getCookie("token")
-                },
-            })
-            .done(function(res) {
-                apriPopup()
-            })
-            
-            .fail(function(result) {
-                let response = result.responseJSON
-                if (response && response.message) {
-                    alert(response.message);
-                } else {
-                    alert("Errore durante la creazione del torneo")
-                }
-            })
-        }
-
-        const form = document.getElementById("myform");
-        form.addEventListener("submit",sendData)
-    </script>
-
+   
 </head>
 
 <body>
@@ -141,4 +64,82 @@
     </div>
 
 </body>
+<script>
+    function apriPopup(){
+        var w = 100;
+        var h = 50;
+        var l = Math.floor((screen.width-w)/2);
+        var t = Math.floor((screen.height-h)/2);
+        window.open("avviatorneo.html","",",,top=" + t + ",left=" + l);
+    }
+
+
+    //parte di event listener e invio dati
+    async function sendData(){
+        console.log("funzione avviata\n")
+        const apiUrl = API_V1+"setuptorneo";
+        var g=document.getElementById("gironi").value;    //numero di gironi
+        var s= document.getElementById("squadre").value;  //numero di squadre
+        var spg= document.getElementById("spg").value;    //numero di squadre per girone
+        var af;                                           //numero di squadre che accedono alla fase finale per girone
+
+        //se i gironi sono 4, vanno alle finali 2 squadre per girone, altrimenti 1
+        if(g==4)
+            af=2
+        else
+            af=4
+
+        //se il numero di squadre non è multiplo di 8 ritorno errore
+        if(s%8!=0){
+            alert("il numero di squadre deve essere multiplo di 8")
+            document.getElementById("squadre").focus();
+            return false;
+        }
+
+        //se il numero di squadre totali e quello delle squadre per girone moltiplicato per il numero dei gironi non torna do errore
+        if(spg*g!=s){
+            alert("incongruenza tra numero squadre per girone e numero squadre")
+            document.getElementById("spg").focus();
+            return false;
+        }
+
+        
+
+        //Se va tutto bene invio i dati al backend
+        let data1={
+            gironi:g,
+            squadre:s,
+            squadre_per_girone: spg,
+            a_finali: af
+        }
+
+        $.ajax({
+            url:apiUrl,
+            type: 'POST',
+            data: JSON.stringify(data1),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            async: false,
+            headers: {
+                'x-access-token': getCookie("token")
+            },
+        })
+        .done(function(res) {
+            apriPopup()
+        })
+        
+        .fail(function(result) {
+            let response = result.responseJSON
+            if (response && response.message) {
+                alert(response.message);
+            } else {
+                alert("Errore durante la creazione del torneo")
+            }
+        })
+    }
+
+    const form = document.getElementById("myform");
+    form.addEventListener("submit",sendData)
+</script>
+
 </html>
