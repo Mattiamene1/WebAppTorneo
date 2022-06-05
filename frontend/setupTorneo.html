@@ -6,52 +6,6 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/ModificaStyle.css">
-</head>
-
-<body>
-    <!-- Header PAGINA DI MODIFICA -->
-    <section>
-        <div class="main-banner" id="top">
-            <div class="caption" bgcolour="grey">
-               <h2>Pagina di setup<em><br> Torneo</em></h2>
-            </div>
-        </div>
-    </section>
-
-    <section class="body-form">
-        <div class="container">
-            <div class="form-type">
-                <em>Inserisci i dati del torneo</em>
-                <br>
-                <form id="myform">
-                    <label for="fname" >Numero gironi: *</label><br>
-                    <input list="gironi" name ="gironi" id="gironi" required>
-
-                    <datalist id="gironi">
-                        <option value="4">
-                        <option value="8">
-                    </datalist>
-
-                    <p>
-                        le squadre che per ogni girone accedono alle fasi finali sono 1 se il numero di gironi è 8,
-                        è 2 se il numero di gironi è 4.
-                    </p><br><br>
-
-                    <label for="lname" >Numeo squadre (multiplo di 8):  *</label><br>
-                    <input type="text" id="squadre" name="squadre" required><br><br>
-
-                    <label for="cf" >Squadre per girone: *</label><br>
-                    <input type="text" id="spg" name="spg" required>  <br><br>
-
-                    <input type="submit" value="Submit" id="submit"><br> 
-                </form>
-            </div>
-        </div>
-    <br>
-
-    <br>
-    </section>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="getCookie.js"></script>
     <script src="./script.js"></script>
@@ -133,16 +87,58 @@
         form.addEventListener("submit",sendData)
     </script>
 
+</head>
 
-  
-   
+<body>
+    <!-- Header PAGINA DI MODIFICA -->
+    <section>
+        <div class="main-banner" id="top">
+            <div class="caption" bgcolour="grey">
+               <h2>Pagina di setup<em><br> Torneo</em></h2>
+            </div>
+        </div>
+    </section>
 
-        
+    <section class="body-form">
+        <div class="container">
+            <div class="form-type">
+                <em>Inserisci i dati del torneo</em>
+                <br>
+                <form id="myform">
+                    <label for="fname" >Numero gironi: *</label><br>
+                    <input list="gironi" name ="gironi" id="gironi" required>
 
+                    <datalist id="gironi">
+                        <option value="4">
+                        <option value="8">
+                    </datalist>
 
+                    <p>
+                        le squadre che per ogni girone accedono alle fasi finali sono 1 se il numero di gironi è 8,
+                        è 2 se il numero di gironi è 4.
+                    </p><br><br>
 
+                    <label for="lname" >Numeo squadre (multiplo di 8):  *</label><br>
+                    <input type="text" id="squadre" name="squadre" required><br><br>
 
+                    <label for="cf" >Squadre per girone: *</label><br>
+                    <input type="text" id="spg" name="spg" required>  <br><br>
 
+                    <input type="submit" value="Submit" id="submit"><br> 
+                </form>
+            </div>
+        </div>
+    <br>
+
+    <br>
+    </section>
+
+    <!-- Footer bottone HOME -->
+    <div class="footer">
+        <div class="button-home">
+            <button type="submit" onclick="location.href='index.html'">HOME</button>
+        </div>
+    </div>
 
 </body>
 </html>
