@@ -2,7 +2,7 @@ async function loadSquadre(){
     token=getCookie("token")
 
     if(token){ //controllo il token, se non c'è non posso fare nulla
-        var apiUrl="http://127.0.0.1:8080/api/v2/mostraiscrizionisquadre"
+        var apiUrl=API_V2+"mostraiscrizionisquadre"
         await fetch(apiUrl,{
             headers: {
                 'x-access-token': token
@@ -77,7 +77,7 @@ async function addsquadra(squadra,index,token){
 }
 
 async function loadGiocatore(id){
-    var apiUrl="http://127.0.0.1:8080/api/v2/giocatore/"+id
+    var apiUrl=API_V2+"giocatore/"+id
     var giocatore= await fetch(apiUrl)
     .then(res=>res.json())
     .then(function(res) { //restituisci giocatore
@@ -92,7 +92,7 @@ async function loadGiocatore(id){
 }
 
 async function approvaSquadra(id){
-    var apiUrl="http://127.0.0.1:8080/api/v2/squadre/"+id+"/approva"
+    var apiUrl=API_V2+"squadre/"+id+"/approva"
 
     token=getCookie("token")
 

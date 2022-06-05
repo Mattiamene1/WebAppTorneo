@@ -11,7 +11,7 @@ async function sendData(){
     var token=getCookie("token")
 
     //console.log(casa+" "+ospite+" "+luogo+" "+data+" "+arbitro+" "+fase)
-    var apiUrl="http://127.0.0.1:8080/api/v2/partita"
+    var apiUrl= API_V2+"partita"
     var toBeSent={
         casa:casaVal,
         ospite:ospiteVal,
