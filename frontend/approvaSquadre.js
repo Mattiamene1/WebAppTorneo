@@ -12,9 +12,14 @@ async function loadSquadre(){
         .then(function(res) { //carica tutte le squadre e i giocatori
             //var squadre=JSON.parse(res)
             var squadre=res;
-            for(var i=0;i<squadre.length;i++){
-                addsquadra(squadre[i],i,token);
+            if(squadre.length>0){
+                for(var i=0;i<squadre.length;i++){
+                    addsquadra(squadre[i],i,token);
+                }
             }
+            else
+                alert("non ci sono partite da approvare")
+            
             
         })
         .catch(function(result) {

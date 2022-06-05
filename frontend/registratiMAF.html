@@ -7,6 +7,40 @@
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/ModificaStyle.css">
     <script src="./script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $("#myform").submit(function(e) {
+                e.preventDefault();
+                let nome = $("#fname").val(),
+                    cognome = $("#lname").val(),
+                    codiceFiscale = $("#cf").val(),
+                    email = $("#email").val();
+                
+                $.ajax({
+                    url: API_V1 + "maf",
+                    method: 'post',
+                    data: {
+                        nome,
+                        cognome,
+                        email,
+                        codiceFiscale
+                    }
+                })
+                .done(function(res) {
+                    alert("MAF salvato correttamente");
+                })
+                .fail(function(result) {
+                    let response = result.responseJSON
+                    if (response.error) {
+                        alert(response.error);
+                    } else {
+                        alert("Errore nella registrazione del MAF")
+                    }
+                })
+            })
+        })
+    </script>
 </head>
 
 <body>
@@ -48,39 +82,13 @@
     <br>
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function() {
-            $("#myform").submit(function(e) {
-                e.preventDefault();
-                let nome = $("#fname").val(),
-                    cognome = $("#lname").val(),
-                    codiceFiscale = $("#cf").val(),
-                    email = $("#email").val();
-                
-                $.ajax({
-                    url: API_V1 + "maf",
-                    method: 'post',
-                    data: {
-                        nome,
-                        cognome,
-                        email,
-                        codiceFiscale
-                    }
-                })
-                .done(function(res) {
-                    alert("MAF salvato correttamente");
-                })
-                .fail(function(result) {
-                    let response = result.responseJSON
-                    if (response.error) {
-                        alert(response.error);
-                    } else {
-                        alert("Errore nella registrazione del MAF")
-                    }
-                })
-            })
-        })
-    </script>
+    <!-- Footer bottone HOME -->
+    <div class="footer">
+        <div class="button-home">
+            <button type="submit" onclick="location.href='index.html'">HOME</button>
+        </div>
+    </div>
+
+    
 </body>
 </html>
