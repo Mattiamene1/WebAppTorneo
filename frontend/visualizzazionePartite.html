@@ -47,6 +47,7 @@
                 window.localStorage.clear();                                // Clear localstorage keys buffer 
 
                 for(i=0;i<response.length;i++){
+
                     if(response[i].fase.localeCompare('gironi')==0){
                         var gironeContainer = document.getElementById("girone");
                         var divGironi=document.createElement("div");
@@ -56,22 +57,10 @@
                         console.log(response[i].casa, " VS ", response[i].ospite, " ID: ", response[i]._id);
                         gironeContainer.appendChild(divGironi);
                         
-                        /**********BUTTON*******************
-                        var insertButtonGir = document.createElement("button");
-                        var idBottoneGir = 'BottonePartitaGirone_'+i;                       // ID div creato per apposita partita
-                        insertButtonGir.setAttribute('id', idBottoneGir);
-                        localStorage.setItem("ID-PARTITA_"+index, _idPartitaDB);
-                        insertButtonGir.setAttribute('onclick', "location.href='inserimentoReferto.html'");       //Apri pagina inserimentoReferto.html
-                        insertButtonGir.innerHTML = "insert";                      
-                        divGironi.appendChild(insertButtonGir);
-                        //************************************/
-
-
-
-                        //*************INPUT******************
+                        //*************INPUT TABELLONE *****************
                         var insertSubmitGir = document.createElement("input");
                         var idSubmitGir = 'SubmitPartitaGirone_'+i;                         // ID div creato per apposita partita
-                        const idPartitaDB = "button_"+response[i]._id;                                // ID Partita nel DB
+                        const idPartitaDB = response[i]._id;                                // ID Partita nel DB
 
                         insertSubmitGir.setAttribute('id', idPartitaDB);                    //Assegno L'ID della partita al bottone
                         insertSubmitGir.setAttribute('type', "submit");
@@ -86,28 +75,30 @@
                         divTab.setAttribute('id', idContainerTab);                   // Assegnazione ID al div
                         divTab.innerHTML = ' | LUOGO: ' + response[i].luogo + ' | CASA: ' + response[i].casa + ' | OSPITE: ' + response[i].ospite + ' | ARBITRO: ' + response[i].arbitro + ' | FASE: ' + response[i].fase + " | ";               
                         tabContainer.appendChild(divTab);
-                    }                 
+
+                        //*************INPUT TABELLONE *****************
+                        var insertSubmitTab = document.createElement("input");
+                        var idSubmitTab = 'SubmitPartitaTabellone_'+i;                         // ID div creato per apposita partita
+                        const idPartitaDB = response[i]._id;                                // ID Partita nel DB
+
+                        insertSubmitTab.setAttribute('id', idPartitaDB);                    //Assegno L'ID della partita al bottone
+                        insertSubmitTab.setAttribute('type', "submit");
+                        insertSubmitTab.setAttribute('value', "insert");                      
+                        divTab.appendChild(insertSubmitTab);
+                        //************************************
+                    }
+
                 }  
-                for(i=1;i<response.length;i++){
-                    idp = "button_"+response[i]._id
+                for(i=0;i<response.length;i++){
+                    idp = response[i]._id
                     console.log("Index Of Buttons", idp, " Cycle: " , i);
-                    const buttonFeature = document.getElementById("idp");
-
+                    const buttonFeature = document.getElementById(idp);
+                    
                     buttonFeature.addEventListener('click', () => {
-                        console.log(buttonFeature,id);
+                        console.log("Button selected: ",buttonFeature.id, " @ index:", i);
                     });
-                    /*
-                    buttonFeature.setAttribute("onclick", "localStorage.setItem(\"ID-PARTITA_\"+i, idp);");
-                    */
+                    buttonFeature.setAttribute("onclick", "localStorage.setItem(\"ID_PARTITA_\", idp);");                 
                 }
-            }
-
-            function key(index, idp){
-                buttonFeature = document.getElementById("idp")
-                console.log("Enering Function: ", _index, _idPartitaDB);
-                localStorage.setItem("ID-PARTITA_"+index, _idPartitaDB);
-                location.href='inserimentoReferto.html';
-                return
             }
             getData();
         </script>
