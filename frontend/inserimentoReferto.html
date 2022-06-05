@@ -25,34 +25,45 @@
             <div class="form-type">
                 <em>Inserire il referto della partita completando tutti i campi.</em>
                 <br>
+                <div id="idMatchSelected">
+                    &nbsp;
+                </div>
                 <div width="900">
                     <form>                 
                         <table>
                             <tr>
                                 <td>
-                                    <label for="casaScore">Goal Casa:</label><br>
+                                    <div id="casaPosix">
+                                        &nbsp;
+                                    </div>
                                     <input size="25" type="number" min="0" id="casaScore" name="casaScore" required>
                                 </td>
                                 <td><br/></td>
                                 <td>
-                                    <label for="ospiteScore">Goal Ospite:</label><br>
+                                    <div id="ospitePosix">
+                                        &nbsp;
+                                    </div>
                                     <input size="25" type="number" min="0" id="ospiteScore" name="ospiteScore" required>
                                 </td>   
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="marcatoriCasa" >Marcatori Casa:</label><br>
-                                    <select id="marcatoriCasa" multiple>
-                                        <option>Inter</option>
+                                    <div id="marcatoriCasa">
+                                        &nbsp;
+                                    </div>
+                                    <select id="marcatoriCasaSelect" multiple>
+                                        <option>Sanchez</option>
                                         <!-- To be add -->
                                     </select>
                                 </td>
                                 <td>&nbsp;</td>
                                 <td>
-                                    <label for="marcatoriOspite" >Marcatori Ospite:</label><br>
-                                    <select id="marcatoriOspite" multiple>
-                                        <option>Milan</option>
+                                    <div id="marcatoriOspite">
+                                        &nbsp;
+                                    </div>
+                                    <select id="marcatoriOspiteSelect" multiple>
+                                        <option>Ibrahimovic</option>
                                         <!-- To be add -->
                                     </select>
                                 </td>
@@ -60,7 +71,7 @@
                         </table>
                     </form>
                     <br/>
-                    <button type="button" onclick="print()">Inserisci</button>
+                    <button type="button" onclick="aa()">Inserisci</button>
                 </div>
             </div>
         </div>
@@ -70,6 +81,80 @@
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="getCookie.js"></script>
+
+    <script>
+        async function getPartite(){
+            const apiUrlPartite = "http://localhost:8080/api/v2/partite";
+            const responseApiPartite = await fetch(apiUrlPartite);                     // Get API               
+            const responsePartite = await responseApiPartite.json();
+            const idMatch = localStorage.getItem('ID-PARTITA_2');                       //DA CAPIRE COME PRNDER EL ID SELEZIONATO
+            console.log("MATCH SELECTED: ", idMatch );
+
+            //Search By ID the choosen match
+            for(i=0;i<responsePartite.length;i++){
+                if(((responsePartite[i]._id).localeCompare(idMatch))==0){
+                    var index = i;
+                    console.log("MATCH SELECTED: ", responsePartite[i]._id, " >>>> " ,  responsePartite[i].casa , " - ", responsePartite[i].ospite);
+                }
+            }
+
+            //Variables to store data about match selected
+            var squadraCasa = responsePartite[index].casa;
+            var squadraOspite = responsePartite[index].ospite;
+            var indicePartita = responsePartite[index]._id;
+
+            //Print on HTML
+            var infoContainer = document.getElementById("idMatchSelected");              //Container Info Match
+            var divInfo = document.createElement("div");                                 //Div for printing
+            divInfo.innerHTML = 'Stai inserendo i dati della partita: ' + responsePartite[index].casa + ' - ' + responsePartite[index].ospite +' del ' + responsePartite[index].data;
+            infoContainer.appendChild(divInfo);
+
+            //Casa
+            var casaContainer = document.getElementById("casaPosix");
+            var labelCasa = document.createElement("label");
+            labelCasa.innerHTML = 'Reti ' + responsePartite[index].casa;
+            labelCasa.setAttribute('for','casaScore');
+            casaContainer.appendChild(labelCasa);
+
+            //Ospite
+            var ospiteContainer = document.getElementById("ospitePosix");
+            var labelOspite = document.createElement("label");
+            labelOspite.innerHTML = 'Reti ' + responsePartite[index].ospite;
+            labelOspite.setAttribute('for','ospiteScore');
+            ospiteContainer.appendChild(labelOspite);
+
+            //Marcatori Casa
+            var casaMarcContainer = document.getElementById("marcatoriCasa");
+            var labelMarcCasa = document.createElement("label");
+            labelMarcCasa.innerHTML = 'Marcatori ' + responsePartite[index].casa;
+            labelMarcCasa.setAttribute('for','marcatoriCasaSelect');
+            casaMarcContainer.appendChild(labelMarcCasa);
+
+            //Marcatori Ospite
+            var ospiteMarcContainer = document.getElementById("marcatoriOspite");
+            var labelMarcOspite = document.createElement("label");
+            labelMarcOspite.innerHTML = 'Marcatori ' + responsePartite[index].ospite;
+            labelMarcOspite.setAttribute('for','marcatoriOspiteSelect');
+            ospiteMarcContainer.appendChild(labelMarcOspite);
+        }
+        getPartite();
+    </script>
+    
+    <!--
+    <script>
+        async function getGiocatori(){
+            const apiUrlGiocatori = "http://localhost:8080/api/v2/squadre";
+            const responseApiGiocatori = await fetch(apiUrlGiocatori);                     // Get API               
+            const responseGiocatori = await responseApiGiocatori.json();
+            console.log("Giocatore: ", responseGiocatori[i].cognome, " ", responseGiocatori[i].nome);
+
+            for(i=0;i<responseGiocatori.length;i++){             
+                console.log("Giocatore: ", responseGiocatori[i].cognome, " ", responseGiocatori[i].nome);                
+            }
+        }
+        getGiocatori();
+    </script>
+    -->
     <script>
         function print(){
             var partitaId = document.getElementById("idPartita").value
@@ -79,15 +164,31 @@
             console.log(partitaId, " ", ngoalCasa, " - ", ngoalOspite)
         }
 
-        
-
-
         async function sendData(){
             console.log("funzione inserimento referto avviata\n")
-            const apiUrl = "http://127.0.0.1:8080/api/v2/inserimentoReferto";   //????????
+            const apiUrl = "http://127.0.0.1:8080/api/v2/inserimentoReferto";   //???????? Da rivedere
+
+            const apiUrlPartite = "http://localhost:8080/api/v2/partite"
+            const responseApiPartite = await fetch(apiUrlPartite)                     // Get API               
+            const responsePartite = await responseApiPartite.json();
+            for(var i=0; responsePartite.lenght<i; i++){
+                console.log(responsePartite[i]._id);
+            }
             var partitaId = document.getElementById("idPartita").value
             var ngoalCasa = document.getElementById("casaScore").value;
             var ngoalOspite = document.getElementById("ospiteScore").value;
+
+
+
+            //const idMatch = localStorage.getItem(ID-PARTITA_2);
+
+
+
+            document.getElementById("idPartita").innerHTML=casa;
+            document.getElementById("casaScore").innerHTML=ospite;
+            document.getElementById("ospiteScore").innerHTML=arbitro;
+            
+
 
             //invio i dati al backend
             let data1={
