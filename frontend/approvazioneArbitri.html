@@ -38,7 +38,7 @@
             approva: function(arbitro) {
                 let vm = this;
                 $.ajax({
-                    url: API_V2 + "arbitri/" + arbitro._id,
+                    url: API_V2 + "arbitri/" + arbitro._id+"/approva",
                     method: 'PUT',
                     headers: {
                         'X-Access-token': AUTH_TOKEN
