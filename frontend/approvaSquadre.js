@@ -1,6 +1,5 @@
 async function loadSquadre(){
     var token=getCookie("token")
-    console.log(token)
     if(token){ //controllo il token, se non c'è non posso fare nulla
         var apiUrl=API_V2+"mostraiscrizionisquadre"
         await fetch(apiUrl,{
