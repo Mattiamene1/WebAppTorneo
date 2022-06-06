@@ -1,5 +1,5 @@
-const API_V1 = "https://ingegneriadelsoftware.herokuapp.com/api/v1/"
-const API_V2 = "https://ingegneriadelsoftware.herokuapp.com/api/v2/"
+const API_V1 = "/api/v1/"
+const API_V2 = "/api/v2/"
 let AUTH_TOKEN = null;
 
 function login() {
