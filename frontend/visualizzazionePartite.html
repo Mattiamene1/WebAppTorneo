@@ -49,30 +49,24 @@
                 window.localStorage.clear();                                // Clear localstorage keys buffer 
 
                 for(i=0;i<response.length;i++){
-
+                    const idPartitaDB = response[i]._id;
                     if(response[i].fase.localeCompare('gironi')==0){
                         var gironeContainer = document.getElementById("girone");
                         var divGironi=document.createElement("div");
-                        var idContainerGir = 'partitaGironi_'+i;
+                        var idContainerGir = 'partita_'+idPartitaDB;                       
                         divGironi.setAttribute('id', idContainerGir);
                         divGironi.innerHTML = ' | LUOGO: ' + response[i].luogo + ' | CASA: ' + response[i].casa + ' | OSPITE: ' + response[i].ospite + ' | ARBITRO: ' + response[i].arbitro + ' | FASE: ' + response[i].fase + " | ";               
-                        console.log(response[i].casa, " VS ", response[i].ospite, " ID: ", response[i]._id);
-                        gironeContainer.appendChild(divGironi);
-                        
-                        //*************SELEZIONA TABELLONE *****************
+                        gironeContainer.appendChild(divGironi);                        
+                        //*************SELECT BUTTON GIRONE******************
                         var selectSubmitGir = document.createElement("input");
                         var idSubmitGir = 'SubmitPartitaGirone_'+i;                         // ID div creato per apposita partita
-                        const idPartitaDB = response[i]._id;                                // ID Partita nel DB
-
+                        //const idPartitaDB = response[i]._id;                                // ID Partita nel DB
                         selectSubmitGir.setAttribute('id', idPartitaDB);                    //Assegno L'ID della partita al bottone
                         selectSubmitGir.setAttribute('type', "button");
-                        selectSubmitGir.setAttribute('value', "select");                      
+                        selectSubmitGir.setAttribute('value', "select");                  
                         divGironi.appendChild(selectSubmitGir);
-                        //**************************************************
-
-                        //*************INSERISCI REFERTO *******************
+                        //*************INSERT BUTTON GIRONE ****************
                         var insertSubmitGir = document.createElement("input");
-
                         insertSubmitGir.setAttribute('id', idPartitaDB);                    //Assegno L'ID della partita al bottone
                         insertSubmitGir.setAttribute('type', "submit");
                         insertSubmitGir.setAttribute('value', "insert");    
@@ -80,41 +74,46 @@
                         divGironi.appendChild(insertSubmitGir);
                         //**************************************************
 
-
-
-
-
-
-
-
                     }else if(response[i].fase.localeCompare('tabellone')==0){
                         var tabContainer = document.getElementById("tabellone");
                         var divTab=document.createElement("div");
-                        var idContainerTab = 'partitaTabellone_'+i;                  // ID div creato per apposita partita
+                        var idContainerTab = 'partita_'+idPartitaDB;                  // ID div creato per apposita partita                       
                         divTab.setAttribute('id', idContainerTab);                   // Assegnazione ID al div
                         divTab.innerHTML = ' | LUOGO: ' + response[i].luogo + ' | CASA: ' + response[i].casa + ' | OSPITE: ' + response[i].ospite + ' | ARBITRO: ' + response[i].arbitro + ' | FASE: ' + response[i].fase + " | ";               
                         tabContainer.appendChild(divTab);
-
-                        //*************INPUT TABELLONE *****************
+                        //*************SELECT BUTTON TABELLONE *************
+                        var selectSubmitTab = document.createElement("input");
+                        var idSubmitGir = 'SubmitPartitaTabellone_'+i;                         // ID div creato per apposita partita
+                        //const idPartitaDB = response[i]._id;                                // ID Partita nel DB
+                        selectSubmitTab.setAttribute('id', idPartitaDB);                    //Assegno L'ID della partita al bottone
+                        selectSubmitTab.setAttribute('type', "button");
+                        selectSubmitTab.setAttribute('value', "select");                      
+                        divTab.appendChild(selectSubmitTab);
+                        //*************INSERT BUTTON TABELLONE *************
                         var insertSubmitTab = document.createElement("input");
-                        var idSubmitTab = 'SubmitPartitaTabellone_'+i;                         // ID div creato per apposita partita
-                        const idPartitaDB = response[i]._id;                                // ID Partita nel DB
-
                         insertSubmitTab.setAttribute('id', idPartitaDB);                    //Assegno L'ID della partita al bottone
                         insertSubmitTab.setAttribute('type', "submit");
-                        insertSubmitTab.setAttribute('value', "insert");                      
+                        insertSubmitTab.setAttribute('value', "insert");
+                        insertSubmitTab.setAttribute('onclick', "actions()");                      
                         divTab.appendChild(insertSubmitTab);
-                        //************************************
+                        //*************************************************
                     }
 
                 }  
                 for(i=0;i<response.length;i++){
                     idp = response[i]._id;
                     const buttonFeature = document.getElementById(idp);
-                    
+                    //Id Div da riquadrare
+                    //var idContainer = 'partita_' + idp;
+
                     buttonFeature.addEventListener('click', () => {
                         console.log("Button selected: ",buttonFeature.id);
+                        //console.log("id Div",idContainer);
                     });
+                    /*
+                    buttonFeature.addEventListener('click', () => {
+                        buttonFeature.setAttribute("onclick", "highlight(idContainer)");
+                    });*/
                     //actions(idp);
                     buttonFeature.setAttribute("onclick", "localStorage.setItem(\"ID_PARTITA_\", id);");                 
                 }
@@ -122,6 +121,12 @@
             function actions(){
                 location.href = 'inserimentoReferto.html';
             }
+            function highlight(idDiv){
+                //console.log(idDiv);
+                var toHighlight = document.getElementById(idDiv);
+                toHighlight.setAttribute("style","border-style: solid");
+            }
+
             getData();
         </script>
     </body>

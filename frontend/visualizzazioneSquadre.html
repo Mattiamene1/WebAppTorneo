@@ -21,7 +21,13 @@
 
         <section>
             <h3>Squadre Iscritte</h3>
-            <div id="squadre">
+            <table id="squadreContainer" border="1">
+                <tr>
+                    <td>Squadra</td><td>Punti</td><td>Gioc</td><td>Vinte</td><td>Pareggiate</td><td>Perse</td>
+                </tr>
+
+            </table>
+            <div id="squadreContainer">
                 <!-- Create here -->
             </div>
         </section>
@@ -32,55 +38,15 @@
                 const apiUrl = "http://localhost:8080/api/v2/squadre"
                 const responseApi = await fetch(apiUrl)                     // Get API               
                 const response = await responseApi.json();                  // Json to js variable
-                
-                console.log(response);                                      // Log tutte le squadre
-                console.log('Elements to print:' + response.length);        // Log Numero squadre
 
-                /*for(i=0;i<response.length;i++){
-                    if(response[i].fase.localeCompare('gironi')==0){
-                        var gironeContainer = document.getElementById("girone");
-                        var divGironi=document.createElement("div");
-                        var idContainerGir = 'partitaGironi_'+i;
-                        divGironi.setAttribute('id', idContainerGir);
-                        divGironi.innerHTML = ' | LUOGO: ' + response[i].luogo + ' | CASA: ' + response[i].casa + ' | OSPITE: ' + response[i].ospite + ' | ARBITRO: ' + response[i].arbitro + ' | FASE: ' + response[i].fase + " | ";               
-                        console.log(response[i].casa, " VS ", response[i].ospite, " ID: ", response[i]._id);
-                        gironeContainer.appendChild(divGironi);
-                */        
-                        /**********BUTTON*******************
-                        var insertButtonGir = document.createElement("button");
-                        var idBottoneGir = 'BottonePartitaGirone_'+i;                       // ID div creato per apposita partita
-                        insertButtonGir.setAttribute('id', idBottoneGir);
-                        insertButtonGir.setAttribute('onclick', "location.href='inserimentoReferto.html'");       //Apri pagina inserimentoReferto.html
-                        insertButtonGir.innerHTML = "insert";                      
-                        divGironi.appendChild(insertButtonGir);
-                        //************************************/
-
-
-
-                        //*************INPUT******************
-                    /*    var insertSubmitGir = document.createElement("input");
-                        var idSubmitGir = 'SubmitPartitaGirone_'+i;                         // ID div creato per apposita partita
-                        const idPartitaDB = response[i]._id;                                // ID Partita nel DB
-
-                        insertSubmitGir.setAttribute('id', idPartitaDB);                    //Assegno L'ID della partita al bottone
-                        insertSubmitGir.setAttribute('type', "submit");
-                        localStorage.setItem("ID-PARTITA_"+i, idPartitaDB);
-                        insertSubmitGir.setAttribute('onclick',"location.href='inserimentoReferto.html';");                      
-                        divGironi.appendChild(insertSubmitGir);
-                        //************************************
-
-
-
-
-                    }else if(response[i].fase.localeCompare('tabellone')==0){
-                        var tabContainer = document.getElementById("tabellone");
-                        var divTab=document.createElement("div");
-                        var idContainerTab = 'partitaTabellone_'+i;                  // ID div creato per apposita partita
-                        divTab.setAttribute('id', idContainerTab);                   // Assegnazione ID al div
-                        divTab.innerHTML = ' | LUOGO: ' + response[i].luogo + ' | CASA: ' + response[i].casa + ' | OSPITE: ' + response[i].ospite + ' | ARBITRO: ' + response[i].arbitro + ' | FASE: ' + response[i].fase + " | ";               
-                        tabContainer.appendChild(divTab);
-                    }                 
-                }*/                
+                for(i=0;i<response.length;i++){
+                        var squadreContainer = document.getElementById("squadreContainer");
+                        var trSquadre=document.createElement("tr");
+                        trSquadre.innerHTML = "<td>" + response[i].nome + ' </td><td> ' + response[i].punteggio + ' </td><td> ' + response[i].giocate + ' </td><td> ' + response[i].vinte + ' </td><td> ' + response[i].pareggiate + ' </td><td> ' + response[i].perse + "</td>" ;               
+                        trSquadre.setAttribute("style","text-align:center");
+                        ///console.log(response[i].casa, " VS ", response[i].ospite, " ID: ", response[i]._id);
+                        squadreContainer.appendChild(trSquadre);
+                }        
             }
             getData();
         </script>

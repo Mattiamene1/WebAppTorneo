@@ -48,30 +48,37 @@
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                        <button type="button" onclick="saveRes()">Inserisci Risultati</button>
+                        <table id="tableBlock">
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td valign="top">
                                     <div id="marcatoriCasa">
                                         &nbsp;
                                     </div>
-                                    <select id="marcatoriCasaSelect" multiple>
-                                        <option>Sanchez</option>
-                                        <!-- To be add -->
-                                    </select>
+
+                                    <div id="divGoalCasa" >
+                                        &nbsp;
+                                    </div>
                                 </td>
                                 <td>&nbsp;</td>
-                                <td>
+                                <td valign="top">
                                     <div id="marcatoriOspite">
                                         &nbsp;
                                     </div>
-                                    <select id="marcatoriOspiteSelect" multiple>
-                                        <option>Ibrahimovic</option>
-                                        <!-- To be add -->
-                                    </select>
+                                    <div id="divGoalOspite" style="vertical-align: top">
+                                        &nbsp;
+                                    </div>
                                 </td>
                             </tr>
                         </table>
                     </form>
                     <br/>
-                    <button type="button" onclick="aa()">Inserisci</button>
                 </div>
             </div>
         </div>
@@ -88,135 +95,233 @@
             const responseApiPartite = await fetch(apiUrlPartite);                     // Get API               
             const responsePartite = await responseApiPartite.json();
             const idMatch = localStorage.getItem('ID_PARTITA_');
-            console.log("MATCH SELECTED: ", idMatch );
 
             //Search By ID the choosen match
             for(i=0;i<responsePartite.length;i++){
                 if(((responsePartite[i]._id).localeCompare(idMatch))==0){
                     var index = i;
                     console.log("MATCH SELECTED: ", responsePartite[i]._id, " >>>> " ,  responsePartite[i].casa , " - ", responsePartite[i].ospite);
+                    localStorage.setItem('squadra-casa', responsePartite[i].casa);
+                    localStorage.setItem('squadra-ospite', responsePartite[i].ospite);
                 }
             }
 
             //Variables to store data about match selected
-            var squadraCasa = responsePartite[index].casa;
-            var squadraOspite = responsePartite[index].ospite;
-            var indicePartita = responsePartite[index]._id;
+            const squadraCasa = responsePartite[index].casa;
+            const squadraOspite = responsePartite[index].ospite;
+            const indicePartita = responsePartite[index]._id;
 
             //Print on HTML
             var infoContainer = document.getElementById("idMatchSelected");              //Container Info Match
             var divInfo = document.createElement("div");                                 //Div for printing
-            divInfo.innerHTML = 'Stai inserendo i dati della partita: ' + responsePartite[index].casa + ' - ' + responsePartite[index].ospite +' del ' + responsePartite[index].data;
+            divInfo.innerHTML = 'Stai inserendo i dati della partita: ' + squadraCasa + ' - ' + squadraOspite +' del ' + responsePartite[index].data;
             infoContainer.appendChild(divInfo);
 
             //Casa
             var casaContainer = document.getElementById("casaPosix");
             var labelCasa = document.createElement("label");
-            labelCasa.innerHTML = 'Reti ' + responsePartite[index].casa;
+            labelCasa.innerHTML = 'Reti ' + squadraCasa;
+            labelCasa.setAttribute('id', squadraCasa);
+            labelCasa.setAttribute('name', 'labelC');
             labelCasa.setAttribute('for','casaScore');
             casaContainer.appendChild(labelCasa);
 
             //Ospite
             var ospiteContainer = document.getElementById("ospitePosix");
             var labelOspite = document.createElement("label");
-            labelOspite.innerHTML = 'Reti ' + responsePartite[index].ospite;
-            labelOspite.setAttribute('for','ospiteScore');
+            labelOspite.innerHTML = 'Reti ' + squadraOspite;
+            labelOspite.setAttribute('id', squadraOspite);
+            labelOspite.setAttribute('name','labelO');
+            labelOspite.setAttribute('for', 'ospiteScore');
             ospiteContainer.appendChild(labelOspite);
 
-            //Marcatori Casa
+        }
+        getPartite();
+
+        async function saveRes(){
+            const apiUrlSquadre = "http://localhost:8080/api/v2/squadre";
+            const responseApiSquadre = await fetch(apiUrlSquadre);                     // Get API               
+            const responseSquadre = await responseApiSquadre.json();
+
+            const teamCasa = localStorage.getItem('squadra-casa');
+            const teamOspite = localStorage.getItem('squadra-ospite');
+
+            const casaScore = document.getElementById("casaScore").value;
+            const ospiteScore = document.getElementById("ospiteScore").value;
+            console.log(responseSquadre);
+            for(ind=0; ind<responseSquadre.length; ind++){
+                if(teamCasa.localeCompare(responseSquadre[ind].nome)==0){
+                    var casaId = responseSquadre[ind]._id;
+                }
+            }
+            for(ind=0; ind<responseSquadre.length; ind++){
+                if(teamOspite.localeCompare(responseSquadre[ind].nome)==0){
+                    var ospiteId = responseSquadre[ind]._id;
+                }
+            }
+
+            localStorage.setItem('numero-gol-casa', casaScore);
+            localStorage.setItem('numero-gol-ospite', ospiteScore);
+            localStorage.setItem('casa-id', casaId);
+            localStorage.setItem('ospite-id', ospiteId);
+            //Ottengo i giocatori da variabile proveniente da API squadre
+            for(c=0; c<casaScore; c++){
+                //Marcatori Casa Div
+                const divGoalC = document.getElementById("divGoalCasa");
+                const divSpaceC = document.createElement("div");
+                const labSelC = c+1 + " Gol ";
+                divSpaceC.setAttribute("id", labSelC);
+                divSpaceC.innerHTML = labSelC;
+                divGoalC.appendChild(divSpaceC);
+                //Marcatori Casa Select
+                const divSelectC = document.getElementById(labSelC);                
+                const selectGoalCasa = document.createElement("select");
+                selectGoalCasa.setAttribute("id", "marcatoriCasaSelect"+c);
+                divSelectC.appendChild(selectGoalCasa);
+
+                for(k=0; k<responseSquadre.length; k++){
+                    if(((responseSquadre[k].nome).localeCompare(teamCasa))==0){
+                        var index_2 = k;
+                        const players = responseSquadre[k].giocatori;                   // Lista Giocatori Squadra Casa             
+                        //Marcatori Casa Options
+                        for(p=0; p<players.length; p++){
+                            var casaMarcSelectOption = document.getElementById("marcatoriCasaSelect"+c);
+                            var optionMarcCasa = document.createElement("option");
+                            optionMarcCasa.setAttribute('id', "CasaOpt"+p);
+                            const apiUrlGiocCasa = "http://localhost:8080/api/v2/giocatore/"+players[p];
+                            const responseApiGiocCasa = await fetch(apiUrlGiocCasa);                     // Get API               
+                            const responseGiocCasa = await responseApiGiocCasa.json();
+
+                            optionMarcCasa.value = players[p];
+                            optionMarcCasa.text = responseGiocCasa.nome + " " + responseGiocCasa.cognome;
+
+                            casaMarcSelectOption.appendChild(optionMarcCasa);
+                        }
+                    }
+                }
+            }    
+            //Marcatori Casa Select Label
             var casaMarcContainer = document.getElementById("marcatoriCasa");
             var labelMarcCasa = document.createElement("label");
-            labelMarcCasa.innerHTML = 'Marcatori ' + responsePartite[index].casa;
+            labelMarcCasa.innerHTML = 'Marcatori ' + teamCasa;
             labelMarcCasa.setAttribute('for','marcatoriCasaSelect');
             casaMarcContainer.appendChild(labelMarcCasa);
 
-            //Marcatori Ospite
+            //***Ospite Script***
+            for(o=0; o<ospiteScore; o++){                                                   //For per creare tanti select quanti gol segnati
+                //Marcatori Ospite Div
+                const divGoal = document.getElementById("divGoalOspite");
+                const divSpace = document.createElement("div");
+                const labSelo = o+1 + " Gol  ";
+                divSpace.setAttribute("id", labSelo);
+                divSpace.setAttribute("width", '100%');
+                divSpace.innerHTML = labSelo;
+                divGoal.appendChild(divSpace);
+                //Marcatori Ospite Select
+                const divSelect = document.getElementById(labSelo);                
+                const selectGoalOspite = document.createElement("select");
+                selectGoalOspite.setAttribute("id", "marcatoriOspiteSelect"+o);
+                divSelect.appendChild(selectGoalOspite);
+
+                for(l=0; l<responseSquadre.length; l++){
+                        if(((responseSquadre[l].nome).localeCompare(teamOspite))==0){
+                        var index_3 = l;
+                        const playersOsp = responseSquadre[l].giocatori;                   // Lista Giocatori Squadra Ospite             
+                        //Marcatori Ospite Options
+                        for(q=0; q<playersOsp.length; q++){
+                            var ospiteMarcSelectOption = document.getElementById("marcatoriOspiteSelect"+o);
+                            var optionMarcOspite = document.createElement("option");
+                            optionMarcOspite.setAttribute('id', "OspiteOpt"+q);
+                            const apiUrlGiocOsp = "http://localhost:8080/api/v2/giocatore/"+playersOsp[q];
+                            const responseApiGiocOsp = await fetch(apiUrlGiocOsp);                     // Get API               
+                            const responseGiocOsp = await responseApiGiocOsp.json();
+
+                            optionMarcOspite.value = playersOsp[q];
+                            optionMarcOspite.text = responseGiocOsp.nome + " " + responseGiocOsp.cognome;
+
+
+                            ospiteMarcSelectOption.appendChild(optionMarcOspite);
+                        }
+                    }
+                }
+            }
+            //Marcatori Ospite Select Label
             var ospiteMarcContainer = document.getElementById("marcatoriOspite");
             var labelMarcOspite = document.createElement("label");
-            labelMarcOspite.innerHTML = 'Marcatori ' + responsePartite[index].ospite;
+            labelMarcOspite.innerHTML = 'Marcatori '+ teamOspite;
             labelMarcOspite.setAttribute('for','marcatoriOspiteSelect');
             ospiteMarcContainer.appendChild(labelMarcOspite);
-        }
-        getPartite();
-    </script>
-    
-    <!--
-    <script>
-        async function getGiocatori(){
-            const apiUrlGiocatori = "http://localhost:8080/api/v2/squadre";
-            const responseApiGiocatori = await fetch(apiUrlGiocatori);                     // Get API               
-            const responseGiocatori = await responseApiGiocatori.json();
-            console.log("Giocatore: ", responseGiocatori[i].cognome, " ", responseGiocatori[i].nome);
 
-            for(i=0;i<responseGiocatori.length;i++){             
-                console.log("Giocatore: ", responseGiocatori[i].cognome, " ", responseGiocatori[i].nome);                
-            }
-        }
-        getGiocatori();
-    </script>
-    -->
-    <script>
-        function print(){
-            var partitaId = document.getElementById("idPartita").value
-            var ngoalCasa = document.getElementById("casaScore").value;
-            var ngoalOspite = document.getElementById("ospiteScore").value;
-
-            console.log(partitaId, " ", ngoalCasa, " - ", ngoalOspite)
+            const tableBlock = document.getElementById("tableBlock");
+            const buttonSender = document.createElement("input");
+            buttonSender.setAttribute('value',"Inserisci Marcatori");
+            buttonSender.setAttribute("id","buttonSender");
+            buttonSender.setAttribute("type","button");
+            buttonSender.setAttribute("onclick", "sendData();");
+            tableBlock.appendChild(buttonSender);
         }
 
-        async function sendData(){
-            console.log("funzione inserimento referto avviata\n")
-            const apiUrl = "http://127.0.0.1:8080/api/v2/inserimentoReferto";   //???????? Da rivedere
+        function sendData(){
+            var token=getCookie("token")
+            const idPartita = localStorage.getItem('ID_PARTITA_');
+            const sqCasa = localStorage.getItem('casa-id');
+            const sqOspite = localStorage.getItem('ospite-id');
+            const scoreC = document.getElementById("casaScore").value;
+            const scoreO = document.getElementById("ospiteScore").value;
+            const numGolTotali = Number(scoreC) + Number(scoreO);
+            const marcatori = [];
+            marcatori.length = numGolTotali;
 
-            const apiUrlPartite = "http://localhost:8080/api/v2/partite"
-            const responseApiPartite = await fetch(apiUrlPartite)                     // Get API               
-            const responsePartite = await responseApiPartite.json();
-            for(var i=0; responsePartite.lenght<i; i++){
-                console.log(responsePartite[i]._id);
+            for(i=0; i<scoreC;i++){
+                marcatori[i] = document.getElementById("marcatoriCasaSelect"+i).value;
+            } 
+            for(j=0; j<scoreO; j++){
+                marcatori[i] = document.getElementById("marcatoriOspiteSelect"+j).value;
+                i++;
             }
-            var partitaId = document.getElementById("idPartita").value
-            var ngoalCasa = document.getElementById("casaScore").value;
-            var ngoalOspite = document.getElementById("ospiteScore").value;
+            console.log("Print to send", sqCasa , " " , scoreC , " - ", scoreO , " " ,sqOspite);
+            console.log(marcatori);          
 
 
-            document.getElementById("idPartita").innerHTML=casa;
-            document.getElementById("casaScore").innerHTML=ospite;
-            document.getElementById("ospiteScore").innerHTML=arbitro;
-            
-
-
-            //invio i dati al backend
-            let data1={
-                partitaRiferimento: partitaId,
-                goalCasa:  ngoalCasa,
-                goalOspite: ngoalOspite,
-                //marcatori: Array
-            }
-
-            $.ajax({
-                url:apiUrl,
-                type: 'POST',
-                data: JSON.stringify(data1),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                async: false,
-                headers: {
-                    'x-access-token': getCookie("token")
-                },
-            })
-            .done(function(res) {
-                apriPopup()
-            })
-            
-            .fail(function(result) {
-                let response = result.responseJSON
-                if (response && response.message) {
-                    alert(response.message);
-                } else {
-                    alert("Errore durante l invio dei dati")
+            //*****************
+            var apiUrl="http://127.0.0.1:8080/api/v2/inserimentoreferti"   //to be verified
+            var toBeSent={
+                partitaRiferimento: idPartita,
+                goalCasa:scoreC ,
+                goalOspite:scoreO,
+                marcatori:marcatori              
                 }
-            })
-        }
+            
+            postData(apiUrl,{
+                method:'POST',
+                headers: {
+                    'x-access-token': token
+            },
+            body:JSON.stringify(toBeSent)
+        })
+        .then((res)=>{
+            alert("partita salvata correttamente");
+        })
+        .catch((error)=>{
+            alert(error);
+        })
+        console.log("END LOAD")
+    }
+
+    async function postData(url, data) {
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
+    });
+    return response.json(); // parses JSON response into native JavaScript objects
+  }
+
     </script>
+
 </body>
 </html>
