@@ -8,45 +8,7 @@
     <link rel="stylesheet" href="assets/css/ModificaStyle.css">
     <script src="./script.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script>
-        const apiUrl = API_V1+"arbitro"
 
-        $(document).ready(function() {
-            $("#myform").submit(function(e) {
-                e.preventDefault();
-                let nome = $("#fname").val(),
-                    cognome = $("#lname").val(),
-                    codiceFiscale = $("#cf").val(),
-                    email = $("#email").val(),
-                    sezione = $("#sezione").val(),
-                    codicePatentino = $("#codicePatentino").val();
-                
-                $.ajax({
-                    url: apiUrl,
-                    method: 'post',
-                    data: {
-                        nome,
-                        cognome,
-                        email,
-                        codiceFiscale,
-                        sezione,
-                        codicePatentino
-                    }
-                })
-                .done(function(res) {
-                    alert("Arbitro salvato correttamente");
-                })
-                .fail(function(result) {
-                    let response = result.responseJSON
-                    if (response.error) {
-                        alert(response.error);
-                    } else {
-                        alert("Errore nella registrazione dell'arbitro")
-                    }
-                })
-            })
-        })
-    </script>
 </head>
 
 <body>
@@ -98,4 +60,43 @@
 
     
 </body>
+<script>
+    const apiUrl = API_V1+"arbitro"
+
+    $(document).ready(function() {
+        $("#myform").submit(function(e) {
+            e.preventDefault();
+            let nome = $("#fname").val(),
+                cognome = $("#lname").val(),
+                codiceFiscale = $("#cf").val(),
+                email = $("#email").val(),
+                sezione = $("#sezione").val(),
+                codicePatentino = $("#codicePatentino").val();
+            
+            $.ajax({
+                url: apiUrl,
+                method: 'post',
+                data: {
+                    nome,
+                    cognome,
+                    email,
+                    codiceFiscale,
+                    sezione,
+                    codicePatentino
+                }
+            })
+            .done(function(res) {
+                alert("Arbitro salvato correttamente");
+            })
+            .fail(function(result) {
+                let response = result.responseJSON
+                if (response.error) {
+                    alert(response.error);
+                } else {
+                    alert("Errore nella registrazione dell'arbitro")
+                }
+            })
+        })
+    })
+</script>
 </html>

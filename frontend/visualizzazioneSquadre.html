@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Visualizzazione Squadre</title>
+        <script src="./script.js"></script>
     </head>
 
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -31,24 +32,25 @@
                 <!-- Create here -->
             </div>
         </section>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
- 
-        <script>
-            async function getData(){
-                const apiUrl = "http://localhost:8080/api/v2/squadre"
-                const responseApi = await fetch(apiUrl)                     // Get API               
-                const response = await responseApi.json();                  // Json to js variable
-
-                for(i=0;i<response.length;i++){
-                        var squadreContainer = document.getElementById("squadreContainer");
-                        var trSquadre=document.createElement("tr");
-                        trSquadre.innerHTML = "<td>" + response[i].nome + ' </td><td> ' + response[i].punteggio + ' </td><td> ' + response[i].giocate + ' </td><td> ' + response[i].vinte + ' </td><td> ' + response[i].pareggiate + ' </td><td> ' + response[i].perse + "</td>" ;               
-                        trSquadre.setAttribute("style","text-align:center");
-                        ///console.log(response[i].casa, " VS ", response[i].ospite, " ID: ", response[i]._id);
-                        squadreContainer.appendChild(trSquadre);
-                }        
-            }
-            getData();
-        </script>
+       
     </body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+ 
+    <script>
+        async function getData(){
+            const apiUrl = "http://localhost:8080/api/v2/squadre"
+            const responseApi = await fetch(apiUrl)                     // Get API               
+            const response = await responseApi.json();                  // Json to js variable
+
+            for(i=0;i<response.length;i++){
+                    var squadreContainer = document.getElementById("squadreContainer");
+                    var trSquadre=document.createElement("tr");
+                    trSquadre.innerHTML = "<td>" + response[i].nome + ' </td><td> ' + response[i].punteggio + ' </td><td> ' + response[i].giocate + ' </td><td> ' + response[i].vinte + ' </td><td> ' + response[i].pareggiate + ' </td><td> ' + response[i].perse + "</td>" ;               
+                    trSquadre.setAttribute("style","text-align:center");
+                    ///console.log(response[i].casa, " VS ", response[i].ospite, " ID: ", response[i]._id);
+                    squadreContainer.appendChild(trSquadre);
+            }        
+        }
+        getData();
+    </script>
 </html>

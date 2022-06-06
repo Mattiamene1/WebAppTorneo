@@ -8,32 +8,7 @@
     <script src="./script.js"></script>
     <script src="./getCookie.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script>
-        function attivatorneo(){
-            const apiUrl = API_V2+"avviatorneo";
-            $.ajax({
-                url:apiUrl,
-                type: 'PUT',
-                async: false,
-                headers: {
-                    'x-access-token': getCookie("token")
-                },
-            })
-            .done(function(res) {
-                alert("Torneo Avviato!");
-            })
-            
-            .fail(function(result) {
-                let response = result.responseJSON
-                if (response && response.message) {
-                    alert(response.message);
-                } else {
-                    alert("Errore durante l'avviamento del torneo")
-                }
-            })
-        }
 
-    </script>
 </head>
 
 
@@ -51,4 +26,30 @@
         </div>
     </div>
 </body>
+<script>
+    function attivatorneo(){
+        const apiUrl = API_V2+"avviatorneo";
+        $.ajax({
+            url:apiUrl,
+            type: 'PUT',
+            async: false,
+            headers: {
+                'x-access-token': getCookie("token")
+            },
+        })
+        .done(function(res) {
+            alert("Torneo Avviato!");
+        })
+        
+        .fail(function(result) {
+            let response = result.responseJSON
+            if (response && response.message) {
+                alert(response.message);
+            } else {
+                alert("Errore durante l'avviamento del torneo")
+            }
+        })
+    }
+
+</script>
 </html>

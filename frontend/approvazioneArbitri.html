@@ -10,58 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3"></script>
     <script src="./script.js"></script>
-    <script>
-        const { createApp } = Vue
-      
-        createApp({
-          data() {
-            return {
-              arbitri: []
-            };
-          },
-          methods: {
-            loadData: function() {
-                let vm = this;
-                $.ajax({
-                    url: API_V2 + "arbitri",
-                    data: {
-                        approvato: false
-                    },
-                    headers: {
-                        'X-Access-token': AUTH_TOKEN
-                    },
-                    success: function(res) {
-                        vm.arbitri = res.data;
-                    }
-                })
-            },
-            approva: function(arbitro) {
-                let vm = this;
-                $.ajax({
-                    url: API_V2 + "arbitri/" + arbitro._id+"/approva",
-                    method: 'PUT',
-                    headers: {
-                        'X-Access-token': AUTH_TOKEN
-                    },
-                }).done(function(res) {
-                    alert("Arbitro approvato con successo");
-                    vm.loadData();
-                }).fail(function(result) {
-                    let response = result.responseJSON
-                    if (response && response.error) {
-                        alert(response.error);
-                    } else {
-                        alert("Errore nell'approvazione")
-                    }
-                })
-            }
-          },
-          mounted: function() {
-            login();
-            this.loadData();
-          }
-        }).mount('#app')
-      </script>
+  
 </head>
 
 <body>
@@ -109,4 +58,56 @@
 
     
 </body>
+<script>
+    const { createApp } = Vue
+  
+    createApp({
+      data() {
+        return {
+          arbitri: []
+        };
+      },
+      methods: {
+        loadData: function() {
+            let vm = this;
+            $.ajax({
+                url: API_V2 + "arbitri",
+                data: {
+                    approvato: false
+                },
+                headers: {
+                    'X-Access-token': AUTH_TOKEN
+                },
+                success: function(res) {
+                    vm.arbitri = res.data;
+                }
+            })
+        },
+        approva: function(arbitro) {
+            let vm = this;
+            $.ajax({
+                url: API_V2 + "arbitri/" + arbitro._id+"/approva",
+                method: 'PUT',
+                headers: {
+                    'X-Access-token': AUTH_TOKEN
+                },
+            }).done(function(res) {
+                alert("Arbitro approvato con successo");
+                vm.loadData();
+            }).fail(function(result) {
+                let response = result.responseJSON
+                if (response && response.error) {
+                    alert(response.error);
+                } else {
+                    alert("Errore nell'approvazione")
+                }
+            })
+        }
+      },
+      mounted: function() {
+        login();
+        this.loadData();
+      }
+    }).mount('#app')
+  </script>
 </html>
