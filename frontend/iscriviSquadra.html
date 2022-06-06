@@ -7,120 +7,6 @@
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/ModificaStyle.css">
 </head>
-
-<script>
-  
-    window.onkeypress = function(event) {  // memsquad() memplayer()
-        if (event.keyCode == 13) {
-            if(teamName && numPlayers){
-                memPlayer();
-            } else {
-                memSquad();
-            }
-            return false;
-        }
-    }
-
-    var numPlayers, teamName, currentPlayer;    // global variables
-    var playersArray = [];
-
-    function memSquad(){
-
-        if(!(document.getElementById("numPlayers").value && document.getElementById("TeName").value)){
-            document.getElementById("TeNameError").classList.remove("noterror");
-            document.getElementById("TeNameError").classList.add("error");
-            return null;
-        }
-
-        numPlayers = document.getElementById("numPlayers").value;
-        teamName = document.getElementById("TeName").value;
-
-        console.log("PRINT_1", "Team: ", teamName, "  Players: ", numPlayers);  /* DEBUGTEST */
-
-        document.getElementById("formSquadraContainer").style.display = "none";
-        document.getElementById("formmyformContainer").style.display = "block";
-
-        currentPlayer = 0;
-
-        playersArray.length = numPlayers;
-
-        trackProgress();
-    }
-
-    function trackProgress(){
-        // console.log("PRINT_2", "Team: ", teamName, "  Players: ", numPlayers);  /* DEBUGTEST */
-        document.getElementById("progressStatus").innerHTML = "You are editing player ";
-        document.getElementById("progressStatus").innerHTML += currentPlayer+1;
-        document.getElementById("progressStatus").innerHTML += " out of ";
-        document.getElementById("progressStatus").innerHTML += numPlayers;
-    }
-
-    function clearPlayerForm(){
-        console.log(" ---  Clearing form --- "); /* DEBUGTEST */
-
-        fname = document.getElementById("fname").value = '';
-        lname = document.getElementById("lname").value = '';
-        cf = document.getElementById("cf").value = '';
-        email = document.getElementById("email").value = '';
-        privacy = document.getElementById("privacy").checked = false;
-    }
-
-    function memPlayer(){
-        var fname = document.getElementById("fname").value;
-        var lname = document.getElementById("lname").value;
-        var cf = document.getElementById("cf").value;
-        var email = document.getElementById("email").value;
-        var privacy = document.getElementById("privacy").checked;
-
-        console.log("PRINT_3", "N: ", fname, " C: ", lname, " cf: ", cf, " email: ", email, " privacy: ", privacy);  /* DEBUGTEST */
-
-        playersArray[currentPlayer] = new Array(fname, lname, cf, email, privacy);
-
-        currentPlayer++;
-        trackProgress();
-        clearPlayerForm();
-
-        if(currentPlayer == numPlayers){
-            endForm();
-        }
-    }
-
-    function endForm(){
-    console.log("Array length:", playersArray.length);
-    console.log(" --- BEGIN ARRAY PRINT ---");  /* DEBUGTEST */
-    for(i=0; i<numPlayers; i++)
-        console.log(playersArray[i][0] , " " , playersArray[i][1] , " " , playersArray[i][2] , " " , playersArray[i][3] , " " , playersArray[i][4]);  /* DEBUGTEST */
-    console.log(" --- END ARRAY PRINT ---");  /* DEBUGTEST */
-
-    document.getElementById("endFormContainer").innerHTML += "<br />\nI giocatori della squadra [";
-    document.getElementById("endFormContainer").innerHTML += teamName;
-    document.getElementById("endFormContainer").innerHTML += "] che hai inserito sono: <br /> \n";
-    for(i=0; i<numPlayers; i++){
-        document.getElementById("endFormContainer").innerHTML += playersArray[i][0]; //nome
-        document.getElementById("endFormContainer").innerHTML += " ";
-        document.getElementById("endFormContainer").innerHTML += playersArray[i][1]; //cognome
-        document.getElementById("endFormContainer").innerHTML += " ";
-        document.getElementById("endFormContainer").innerHTML += playersArray[i][2]; //CF
-        document.getElementById("endFormContainer").innerHTML += " ";
-        document.getElementById("endFormContainer").innerHTML += playersArray[i][3]; //mail
-        document.getElementById("endFormContainer").innerHTML += " ";
-        document.getElementById("endFormContainer").innerHTML += playersArray[i][4]; //privacy
-        document.getElementById("endFormContainer").innerHTML += " <br /> \n";
-    }
-      
-
-    document.getElementById("formmyformContainer").style.display = "none";
-    document.getElementById("endFormContainer").style.display = "block";
-  }
-
-
-
-
-
-
-
-</script>
-
 <body>
     <!-- Header Iscrizione Squadra -->
     <section>
@@ -131,63 +17,109 @@
         </div>
     </section>
 
-    <section class="body-form">
+    <section class="body-form" id="app">
         <div class="container" id="formSquadraContainer">
             <div class="form-type">
-                <em>Inserire i propri dati e quelli dei componenti della squadra completando tutti i campi richiesti.</em>
+                <em>Inserire i dati della squadra e dei componenti completando tutti i campi richiesti.</em>
                 <br>
                 <form id="formSquadra">
-                    <label for="TeName" >Nome Squadra: *</label><br>
-                    <input type="text" id="TeName" name="TeamName" required><br />
+                    <label for="nome" >Nome Squadra: *</label><br>
+                    <input type="text" id="nome" name="nome" required v-model="squadra.nome"><br />
+                    <label for="girone" >Girone: *</label><br>
+                    <input type="number" id="girone" name="girone" required v-model="squadra.girone"><br />
                     <span id="TeNameError" class="noterror">Campo richiesto</span><br /><br />
                     <label for="numPlayers" >Numero Giocatori da Iscrivere: *</label><br>
-                    <select id="numPlayers" name="numberOfPlayers" form="formSquadra" required><br><br>
-                        <option value="2">2</option>  /* DEBUGTEST */
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select><br>&nbsp;<br>
-                    <!-- <input type="submit" value="Conferma" id="submitTeam" onclick="a()"><br>&nbsp;<br> OldButtonForm -->
-                    <button type="button" onclick="memSquad()">Invia dati</button>
+                    <select id="numPlayers" v-model="numGiocatori" form="formSquadra" required><br><br>
+                        <option v-for="i in numGiocatoriMax">{{i}}</option>
+                    </select>
+                    <br>
+                    <span v-if="numGiocatori < 5">È necessario inserire almeno 5 giocatori</span><br>
                 </form>
             </div>
         </div>
-        <br>&nbsp;<br>
-        <script>
-
-
-            //document.write(value).value
-        </script>
-        <div class="container" id="formmyformContainer" style="display:none;">
-            <div class="form-type">
-                <form id="myform">
-                    <div id="progressStatus">PLACEHOLDERTEXT</div>
-                    <label for="fname" >Nome: *</label><br>
-                    <input type="text" id="fname" name="name" required><br><br>
-                    <label for="lname" >Cognome: *</label><br>
-                    <input type="text" id="lname" name="surname" required><br><br>
-                    <label for="cf" >Codice Fiscale: *</label><br>
-                    <input type="text" id="cf" name="cf" required>  Non te lo ricordi? <a href="http://www.codicefiscaleonline.com/">Clicca qui</a><br><br>
-                    <label for="mail">Email: (Google) *</label><br>
-                    <input type="email" id="email" name="email" pattern=".+@gmail\.com" size="30" required><br>
-
-                    <input type="checkbox" id="privacy" name="privacy" value="privacy" required>
-                    <label for="privacy">Dichiaro di aver letto l'<a target="_blank" href="#">informativa sulla privacy</a> ai sensi del GDPR e do il consenso al trattamento dei dati personali.</label><br>
-                    <!-- <input type="submit" value="avanti" id="submitPlayers"><br>&nbsp;<br> -->
-                    <button type="button" onclick="memPlayer()">Avanti</button>
-                </form>
+        <div class="container">
+            <div class="row">
+                <div class="card col-4" v-for="(giocatore, i) in squadra.giocatori">
+                    <div class="card-body">
+                        <div class="card-title">Giocatore n. {{ i + 1 }}</div>
+                        <label for="fname" >Nome: *</label><br>
+                        <input type="text" id="fname" name="name" v-model="giocatore.nome" required><br><br>
+                        <label for="lname" >Cognome: *</label><br>
+                        <input type="text" id="lname" name="surname" v-model="giocatore.cognome" required><br><br>
+                        <label for="cf" >Codice Fiscale: *</label><br>
+                        <input type="text" id="cf" name="cf" required v-model="giocatore.codiceFiscale">  Non te lo ricordi? <a href="http://www.codicefiscaleonline.com/">Clicca qui</a><br><br>
+                        <label for="mail">Email: (Google) *</label><br>
+                        <input type="email" id="email" name="email" pattern=".+@gmail\.com" size="30" required v-model="giocatore.email"><br>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="container" id="endFormContainer" style="display:none;">
-          Fine dell'inserimento squadra.
+
+       
+        <div class="container p-3" id="endFormContainer">
+            <button class="btn btn-primary" @click="salvaSquadra">Salva squadra</button>
         </div>
     <br>
     &nbsp;
     <br>
     </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="./script.js"></script>
+    <script>
+        const { createApp } = Vue
+      
+        createApp({
+        data() {
+            return {
+                numGiocatori: 0,
+                numGiocatoriMax: 10,
+                squadra: {
+                    nome: "",
+                    giocatori: []
+                }
+            };
+        },
+        watch: {
+            numGiocatori: function(val) {
+                let giocatori = [];
+                for (let i = 0; i < val; i++) {
+                    giocatori.push({
+                        nome: "",
+                        cognome: "",
+                        codiceFiscale: "",
+                        email: ""
+                    })
+                }
+                this.squadra.giocatori = giocatori
+            }
+        },
+        methods: {
+            salvaSquadra: function(arbitro) {
+                let vm = this;
+                $.ajax({
+                    url: API_V2 + "squadra",
+                    method: 'POST',
+                    data: vm.squadra
+                }).done(function(res) {
+                    alert("Squadra salvata con successo");
+                    vm.loadData();
+                }).fail(function(result) {
+                    let response = result.responseJSON
+                    if (response && response.error) {
+                        alert(response.error);
+                    } else {
+                        alert("Errore nell'iscrizione della squadra")
+                    }
+                })
+            }
+        },
+        mounted: function() {
+            this.numGiocatori = 5;
+        }
+        }).mount('#app')
+    </script>
 
     <!-- Script jquery
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
