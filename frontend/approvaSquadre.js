@@ -27,7 +27,7 @@ async function loadSquadre(){
         })
     }
     else{
-        alert("questa pagina richiede l'autenticazione")
+        alert("questa funzione richiede l'autenticazione")
         return
     }
 }
@@ -127,4 +127,12 @@ async function approvaSquadra(id){
         alert("utente non autenticato, impossibile approvare squadra")
     }
 
+}
+function verificaToken(){
+    token=getCookie("token")
+    if(!token){
+        alert("questa apgina è accessibie solo previo accesso!")
+        window.location.replace("index.html");   
+        return
+    }
 }

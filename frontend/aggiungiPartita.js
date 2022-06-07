@@ -65,3 +65,12 @@ async function postData(url, data) {
     });
     return response.json(); // parses JSON response into native JavaScript objects
   }
+
+function verificaToken(){
+    token=getCookie("token")
+    if(!token){
+        alert("questa apgina è accessibie solo previo accesso!")
+        window.location.replace("index.html");   
+        return
+    }
+}

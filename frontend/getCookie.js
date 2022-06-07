@@ -1,7 +1,10 @@
 function getCookie(cookieName){
-    const cookieValue = document.cookie
+    const cookie = document.cookie
     .split('; ')
     .find(row => row.startsWith(cookieName+'='))
-    .split('=')[1];
+    if(!cookie)
+        return
+    
+    var cookieValue=cookie.split('=')[1];
     return cookieValue;
 }
