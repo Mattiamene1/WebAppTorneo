@@ -9,6 +9,10 @@ async function sendData(){
     var faseVal= document.getElementById("fase").value;
 
     var token=getCookie("token")
+    if(!token){
+        alert("questa pagina richiede l'autenticazione")
+        return
+    }
 
     //console.log(casa+" "+ospite+" "+luogo+" "+data+" "+arbitro+" "+fase)
     var apiUrl= API_V2+"partita"

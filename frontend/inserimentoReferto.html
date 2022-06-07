@@ -94,7 +94,7 @@
 
     <script>
         async function getPartite(){
-            const apiUrlPartite = "http://localhost:8080/api/v2/partite";
+            const apiUrlPartite = API_V2+"partite";
             const responseApiPartite = await fetch(apiUrlPartite);                     // Get API               
             const responsePartite = await responseApiPartite.json();
             const idMatch = localStorage.getItem('ID_PARTITA_');
@@ -142,7 +142,7 @@
         getPartite();
 
         async function saveRes(){
-            const apiUrlSquadre = "http://localhost:8080/api/v2/squadre";
+            const apiUrlSquadre = API_V2+"squadre";
             const responseApiSquadre = await fetch(apiUrlSquadre);                     // Get API               
             const responseSquadre = await responseApiSquadre.json();
 
@@ -191,7 +191,7 @@
                             var casaMarcSelectOption = document.getElementById("marcatoriCasaSelect"+c);
                             var optionMarcCasa = document.createElement("option");
                             optionMarcCasa.setAttribute('id', "CasaOpt"+p);
-                            const apiUrlGiocCasa = "http://localhost:8080/api/v2/giocatore/"+players[p];
+                            const apiUrlGiocCasa = API_V2+"giocatore/"+players[p];
                             const responseApiGiocCasa = await fetch(apiUrlGiocCasa);                     // Get API               
                             const responseGiocCasa = await responseApiGiocCasa.json();
 
@@ -235,7 +235,7 @@
                             var ospiteMarcSelectOption = document.getElementById("marcatoriOspiteSelect"+o);
                             var optionMarcOspite = document.createElement("option");
                             optionMarcOspite.setAttribute('id', "OspiteOpt"+q);
-                            const apiUrlGiocOsp = "http://localhost:8080/api/v2/giocatore/"+playersOsp[q];
+                            const apiUrlGiocOsp = API_V2+"giocatore/"+playersOsp[q];
                             const responseApiGiocOsp = await fetch(apiUrlGiocOsp);                     // Get API               
                             const responseGiocOsp = await responseApiGiocOsp.json();
 
@@ -287,7 +287,7 @@
 
 
             //*****************
-            var apiUrl="http://127.0.0.1:8080/api/v2/inserimentoreferti"   //to be verified
+            var apiUrl=API_V2+"inserimentoreferti"   //to be verified
             var toBeSent={
                 partitaRiferimento: idPartita,
                 goalCasa:scoreC ,

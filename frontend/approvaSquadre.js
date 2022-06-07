@@ -26,6 +26,10 @@ async function loadSquadre(){
             console.log(result)
         })
     }
+    else{
+        alert("questa pagina richiede l'autenticazione")
+        return
+    }
 }
 
 async function addsquadra(squadra,index,token){

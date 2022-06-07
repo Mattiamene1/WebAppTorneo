@@ -29,12 +29,17 @@
 <script>
     function attivatorneo(){
         const apiUrl = API_V2+"avviatorneo";
+        var token=getCookie("token")
+        if(!token){
+            alert("questa pagina richiede l'autenticazione!")
+            return
+        }
         $.ajax({
             url:apiUrl,
             type: 'PUT',
             async: false,
             headers: {
-                'x-access-token': getCookie("token")
+                'x-access-token': token
             },
         })
         .done(function(res) {
