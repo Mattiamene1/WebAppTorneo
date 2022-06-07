@@ -13,7 +13,7 @@
 
 
 
-<body>
+<body onload="verificaToken()">
 
     <form>
         <input type="button" value="attiva torneo" onclick=attivatorneo()>
@@ -26,7 +26,7 @@
         </div>
     </div>
 </body>
-<script>
+<script onload="">
     function attivatorneo(){
         const apiUrl = API_V2+"avviatorneo";
         var token=getCookie("token")
@@ -54,6 +54,14 @@
                 alert("Errore durante l'avviamento del torneo")
             }
         })
+    }
+    function verificaToken(){
+        token=getCookie("token")
+        if(!token){
+            alert("questa pagina è accessibie solo previo accesso!")
+            window.location.replace("index.html");   
+            return
+        }
     }
 
 </script>

@@ -131,7 +131,7 @@ async function approvaSquadra(id){
 function verificaToken(){
     token=getCookie("token")
     if(!token){
-        alert("questa apgina è accessibie solo previo accesso!")
+        alert("questa pagina è accessibie solo previo accesso!")
         window.location.replace("index.html");   
         return
     }
