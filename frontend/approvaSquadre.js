@@ -1,35 +1,29 @@
 async function loadSquadre(){
-    var token=getCookie("token")
-    if(token){ //controllo il token, se non c'è non posso fare nulla
-        var apiUrl=API_V2+"mostraiscrizionisquadre"
-        await fetch(apiUrl,{
-            headers: {
-                'x-access-token': token
+    var apiUrl=API_V2+"mostraiscrizionisquadre"
+    await fetch(apiUrl,{
+        headers: {
+            'x-access-token': token
+        }
+    })//creo la richiesta inserendo il token
+    .then(res=>res.json())
+    .then(function(res) { //carica tutte le squadre e i giocatori
+        //var squadre=JSON.parse(res)
+        var squadre=res;
+        if(squadre.length>0){
+            for(var i=0;i<squadre.length;i++){
+                addsquadra(squadre[i],i,token);
             }
-        })//creo la richiesta inserendo il token
-        .then(res=>res.json())
-        .then(function(res) { //carica tutte le squadre e i giocatori
-            //var squadre=JSON.parse(res)
-            var squadre=res;
-            if(squadre.length>0){
-                for(var i=0;i<squadre.length;i++){
-                    addsquadra(squadre[i],i,token);
-                }
-            }
-            else
-                alert("non ci sono partite da approvare")
-            
-            
-        })
-        .catch(function(result) {
-            alert("Errore durante il caricamento delle squadre")
-            console.log(result)
-        })
-    }
-    else{
-        alert("questa funzione richiede l'autenticazione")
-        return
-    }
+        }
+        else
+            alert("non ci sono partite da approvare")
+        
+        
+    })
+    .catch(function(result) {
+        alert("Errore durante il caricamento delle squadre")
+        console.log(result)
+    })
+    
 }
 
 async function addsquadra(squadra,index,token){
